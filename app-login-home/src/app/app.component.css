@@ -1,3 +1,21 @@
+.appPageHeader {
+  /* padding: 15px; */
+  text-align: left;
+  /* grid-template-columns: 300px auto auto auto; */
+  width: 130px;
+  /* background: #11aabb; */
+  /* color: black; */
+  font-size: 7px;
+  padding: 5px 1em 1em 1em;
+  background-color: rgb(24, 155, 179);
+}
+
+.appPageHeader h1 {
+  font-size: 15px;
+  
+}
+
+
 /* :host {
     display: flex;
     min-height: 100%;
