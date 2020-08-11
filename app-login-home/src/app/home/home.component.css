@@ -1,0 +1,14 @@
+.appPageHeader {
+    text-align: left;
+    width: 130px;
+    /* background: #11aabb; */
+    /* color: black; */
+    font-size: 7px;
+    padding: 5px 1em 1em 1em;
+    background-color: rgb(24, 155, 179);
+  }
+  
+  .appPageHeader h1 {
+    font-size: 15px;
+    
+  }
