@@ -1,16 +1,30 @@
 
-<section>
-  <!-- <login-form></login-form> -->
-  <app-navbar>
-    
-    
-  </app-navbar>
-</section>
-  <section>   
-    <app-sidebar>
-      
-    </app-sidebar>
-  </section>
-  <section>
-    <router-outlet></router-outlet>
-  </section>
+  <div class="container-fluid">
+    <div class="row" id="INTESTAZIONE">
+      <div class="col-sm-12" >
+        <app-navbar></app-navbar>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="CORPO">
+    <!-- <div class="col-sm-4" id="LATO_SX" >Left Navigation</div> -->
+    <div class="col-sm-2" id="LATO_SX" >
+      <app-sidebar></app-sidebar>
+    </div>
+    <!-- <div class="col-sm-8" id="LATO_DX">Content</div> -->
+    <div class="col-sm-8" id="LATO_DX">
+      <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+
+
+<!-- 
+  <app-navbar>  </app-navbar>
+ 
+  <app-sidebar> </app-sidebar>
+  
+  <router-outlet></router-outlet>
+   -->
