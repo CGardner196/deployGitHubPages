@@ -1,0 +1,25 @@
+<div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+
+    <!-- <label for="successMessage">Success Message</label>
+    <input type="text" name="successMessage"> -->
+    <!-- <input type="submit"  name="submitSuccess" value="Submit"> -->
+    <button class="button" name="submitError" (click)="onSubmit()">Error Message</button>
+    
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    
+
+    <div *ngIf="submit">
+        <fa-icon [icon]="errorIcon" [styles]="{'color': 'red'}">
+
+        </fa-icon>  {{ errorMsg }}
+    </div>
+    
+    
+</div>
