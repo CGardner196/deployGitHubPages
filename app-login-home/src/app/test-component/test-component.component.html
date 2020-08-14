@@ -1,0 +1,23 @@
+<p>test-component works!</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Key</th>
+        <th scope="col">Name</th>
+        <th scope="col">Login</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users" [user]="user">
+            <th scope="row">{{ user.key }}</th>
+            <td>{{ user.name }}</td>
+            <td>{{ user.login }}</td>
+        </tr>
+    </tbody>
+</table>

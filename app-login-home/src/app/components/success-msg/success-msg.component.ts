@@ -11,6 +11,7 @@ export class SuccessMsgComponent implements OnInit {
   submit = false;
 
   successMessage = "Registration went well !";
+
   constructor() { 
 
     this.submit = false;
@@ -18,7 +19,7 @@ export class SuccessMsgComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+    
   }
 
   onSubmit() {
