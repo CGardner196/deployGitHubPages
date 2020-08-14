@@ -1,23 +1,26 @@
-
-  <div class="container-fluid">
-    <div class="row" id="INTESTAZIONE">
-      <div class="col-sm-12" >
-        <app-navbar></app-navbar>
+<div class="container-fluid">
+      <div class="row" id="INTESTAZIONE">
+        <div class="col-sm-12" >
+          <app-navbar></app-navbar>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row" id="CORPO">
-    <!-- <div class="col-sm-4" id="LATO_SX" >Left Navigation</div> -->
-    <div class="col-sm-2" id="LATO_SX" >
-      <app-sidebar></app-sidebar>
-    </div>
-    <!-- <div class="col-sm-8" id="LATO_DX">Content</div> -->
-    <div class="col-sm-8" id="LATO_DX">
-      <router-outlet></router-outlet>
-    </div>
+    <div class="row" id="CORPO">
+      <!-- <div class="col-sm-4" id="LATO_SX" >Left Navigation</div> -->
+      <div class="col-sm-2" id="LATO_SX" >
+        <app-sidebar></app-sidebar>
+      </div>
+      <!-- <div class="col-sm-8" id="LATO_DX">Content</div> -->
+      <div class="col-sm-8" id="LATO_DX">
+        
+
+        <button class="button" name="logOut" (click)="logOut()">Log Out</button>
+
+        <router-outlet></router-outlet>
+      </div>
+      
 </div>
-
 
 
 
@@ -28,3 +31,23 @@
   
   <router-outlet></router-outlet>
    -->
+
+   <!-- <app-success-msg></app-success-msg>
+        <app-error-msg>*</app-error-msg>
+        
+        
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Login</th>
+              <th scope="col">Password</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users" [user]="user">
+                  <th scope="row">{{ user.login }}</th>
+                  <td>{{ user.pwd }}</td>
+              </tr>
+          </tbody>
+        </table> -->

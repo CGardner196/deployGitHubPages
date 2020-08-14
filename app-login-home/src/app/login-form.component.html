@@ -6,11 +6,13 @@
                 [formGroup]="form"
                 (ngSubmit)="onSubmit(form.value)">
             
-                <input type="text" name="login" id="name" formControlName="login" class="fadeIn second" placeholder="Username">
-                <input type="password" name="password" id="password" formControlName="password" placeholder="Password" 
+                <input type="text" name="login" id="login" formControlName="login" class="fadeIn second" placeholder="Username">
+                <input type="password" name="pwd" id="pwd" formControlName="pwd" placeholder="Password" 
                     class="fadeIn third">
 
                 <input type="submit" class="fadeIn fourth" value="Submit">
+                <div *ngIf="error"><fa-icon [icon]="errorIcon" [styles]="{'color': 'red'}"></fa-icon>
+                    Login or password incorrect !</div>
             </form>
         </div>
     </div>

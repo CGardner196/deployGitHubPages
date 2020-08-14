@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SessionStorage } from 'angular-web-storage';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +8,21 @@ import { SessionStorage } from 'angular-web-storage';
 export class StoreService {
 
   users = new BehaviorSubject<Object>(null);
+  currentUser: string;
 
-  public get getUsers() {
+  getUsers() {
+    // console.log(this.users.getValue())
     return this.users.getValue();
+    // console.log(this.users.getValue)
   }
 
-  public set setUsers(users) {
+  setUsers(users) {
     this.users.next(users);
   }
   
   constructor() { 
-    if(SessionStorage("users")) {
-      this.users.next(SessionStorage("users"));
+    if(sessionStorage.getItem("users")) {
+      this.users.next(sessionStorage.getItem("users"));
     }
   }
 }

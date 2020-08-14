@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService } from './auth/auth-service.service';
+
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'login-form',
@@ -9,18 +12,36 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
     form: FormGroup;
-
-    constructor(private router: Router) {}
+    errorIcon = faExclamationCircle;
+    error = false;
+    constructor(private router: Router, private auth: AuthServiceService) {}
 
     ngOnInit() {
         this.form = new FormGroup({
             login: new FormControl(''),
-            password: new FormControl('')
+            pwd: new FormControl('')
         });
     }
 
-    onSubmit(userCredentials) {
-        console.log(userCredentials);
-        this.router.navigate(['/home']);
+    onSubmit(user) {
+        if(this.auth.logIn(user)){
+            this.router.navigate(['/home']);
+        }
+        else {
+            this.router.navigate(['/login']);
+            this.error=true;
+        }
     }
 }
+
+    // if(!this.users.find(item => item.pwd === user.pwd)) {
+    //   console.log(this.users)
+    //   // console.log(this.users.indexOf(user));
+    //   console.log(user)
+    //   console.log("user not found");
+
+    //   this.router.navigate(['/login']);
+    // } 
+    // else {
+    //   this.router.navigate(['/home']);
+    // }

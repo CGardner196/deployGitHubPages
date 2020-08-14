@@ -12,4 +12,10 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // home() {
+  //   this.router.navigate(['/home']);
+  // }
+  // login() {
+  //   this.router.navigate(['/login']);
+  // }
 }

@@ -1,0 +1,15 @@
+{
+    "users": [
+        {"login":"sa", "pwd":"sa"},
+        {"login":"rahim", "pwd":"dahmoudi@dahmoudi.com"},
+        {"login":"don", "pwd":"johnson@johnson.com"},
+        {"login":"sandy", "pwd":"kilo@kilo.com"},
+        {"login":"zebra", "pwd":"zebra@zebra.com"},
+        {"login":"rando", "pwd":"rando@rando.com"},
+        {"login":"candy@candy.com", "pwd":"candy"},
+        {"login":"doxy", "pwd":"doxy@doxy.com"},
+        {"login":"darbo", "pwd":"darbo@darbo.com"},
+        {"login":"honko", "pwd":"honko@honko.com"},
+        {"login":"sirby", "pwd":"sirby@sirby.com"}
+    ]
+}

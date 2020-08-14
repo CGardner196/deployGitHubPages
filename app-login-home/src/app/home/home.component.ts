@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from '../services/store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: StoreService, private router: Router) { 
+
+  }
 
   ngOnInit(): void {
   }
 
+  logOut() {
+    sessionStorage.setItem("currentUser", this.store.currentUser)
+    this.store.currentUser = "";
+    this.router.navigate(['/login']);
+  }
 }

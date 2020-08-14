@@ -2,18 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login-form.component';
 import { HomeComponent } from './home/home.component';
-import { TestComponentComponent } from './test-component/test-component.component';
+// import { TestComponentComponent } from './test-component/test-component.component';
 
-import { SuccessMsgComponent } from './components/success-msg/success-msg.component';
-import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
+// import { SuccessMsgComponent } from './components/success-msg/success-msg.component';
+// import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
 import { BehaviourSubjectComponent } from './components/behaviour-subject/behaviour-subject.component';
 
 const routes: Routes = [
-  {path: 'success', component: SuccessMsgComponent},
-  {path: 'error', component: ErrorMsgComponent},
-  {path: 'behavioursubject', component: BehaviourSubjectComponent},
-
-  { path: 'testcomponent', component: TestComponentComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,3 +19,10 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
+
+// {path: 'success', component: SuccessMsgComponent},
+// {path: 'error', component: ErrorMsgComponent},
+// {path: 'behavioursubject', component: BehaviourSubjectComponent},
+
+// { path: 'testcomponent', component: TestComponentComponent },
