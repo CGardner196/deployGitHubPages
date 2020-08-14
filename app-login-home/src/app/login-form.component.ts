@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthServiceService } from './auth/auth-service.service';
+import { AuthService } from './auth/auth.service';
 
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,7 +14,7 @@ export class LoginFormComponent implements OnInit {
     form: FormGroup;
     errorIcon = faExclamationCircle;
     error = false;
-    constructor(private router: Router, private auth: AuthServiceService) {}
+    constructor(private router: Router, private auth: AuthService) {}
 
     ngOnInit() {
         this.form = new FormGroup({

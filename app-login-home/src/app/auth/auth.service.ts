@@ -3,7 +3,7 @@ import { StoreService } from '../services/store.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthServiceService {
+export class AuthService {
 
   users;
 

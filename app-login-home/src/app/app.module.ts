@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 // import { TestComponentComponent } from './test-component/test-component.component';
 
-import { AuthServiceService } from './auth/auth-service.service';
+import { AuthService } from './auth/auth.service';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from './components/components.module';
@@ -24,7 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [AppComponent, LoginFormComponent, HomeComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, NgbModule, ComponentsModule, FontAwesomeModule],
-  providers: [AuthServiceService],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
