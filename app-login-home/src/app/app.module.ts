@@ -13,6 +13,7 @@ import { LoggedInGuard } from './services/logged-in.guard';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from './components/components.module';
+import { RefsModule } from './pages/refs/refs.module';
 
 // Font Awesome
 // import { FontAwesomeModule } from '@fdortawesome/angular-fontawesome';
@@ -24,7 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent, LoginFormComponent, HomeComponent, TestComponentComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, NgbModule, ComponentsModule, FontAwesomeModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, NgbModule, ComponentsModule, RefsModule, FontAwesomeModule],
   providers: [AuthService, LoggedInGuard],
   bootstrap: [AppComponent],
 })

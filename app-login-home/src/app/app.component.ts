@@ -15,6 +15,8 @@ export class AppComponent {
   ngOnInit(): void {
     this.store.setUsers(db.users);
     console.log(db.users);
+    this.store.setRefs(db.refs);
+    console.log(db.refs);
     // for(let user in db.users) {
     //   // console.log(db.users.findIndex(JSON.parse(user)));
     // }

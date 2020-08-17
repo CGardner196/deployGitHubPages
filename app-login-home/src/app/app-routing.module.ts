@@ -4,14 +4,20 @@ import { LoginFormComponent } from './login-form.component';
 import { HomeComponent } from './home/home.component';
 import { LoggedInGuard } from './services/logged-in.guard';
 import { TestComponentComponent } from './test-component/test-component.component';
+import { RefListComponent } from './pages/refs/ref-list/ref-list.component';
+import { RefFrmComponent } from './pages/refs/ref-frm/ref-frm.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
-  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard]},
-  { path: 'testcomponent', component: TestComponentComponent },
-  { path: '**', component: LoginFormComponent }  
+  { path: 'home', component: HomeComponent },
+  // , canActivate: [LoggedInGuard]},
+  { path: 'testcomponent', component: TestComponentComponent }
+  
+  // { path: '**', component: LoginFormComponent }
 ];
+
+// RefFrmComponent
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

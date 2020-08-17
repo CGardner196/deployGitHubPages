@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class StoreService {
 
   users = new BehaviorSubject<Object>(null);
+  refs = new BehaviorSubject<Object>(null);
   currentUser: string;
 
   getUsers() {
@@ -19,10 +20,24 @@ export class StoreService {
   setUsers(users) {
     this.users.next(users);
   }
+
+  getRefs() {
+    // console.log(this.users.getValue())
+    return this.refs.getValue();
+    // console.log(this.users.getValue)
+  }
+
+  setRefs(refs) {
+    this.refs.next(refs);
+  }
+
   
   constructor() { 
     if(sessionStorage.getItem("users")) {
       this.users.next(sessionStorage.getItem("users"));
+    }
+    if(sessionStorage.getItem("refs")) {
+      this.refs.next(sessionStorage.getItem("refs"));
     }
   }
 }

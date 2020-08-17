@@ -11,5 +11,12 @@
         {"login":"darbo", "pwd":"darbo@darbo.com"},
         {"login":"honko", "pwd":"honko@honko.com"},
         {"login":"sirby", "pwd":"sirby@sirby.com"}
+    ],
+    "refs": [
+        {"code":"type", "lib":"Types de voitures"},
+        {"code":"col", "lib":"Couleurs de voitures"},
+        {"code":"models", "lib":"Modèles"},
+        {"code":"etats", "lib":"Etats"},
+        {"code":"profils", "lib":"Profils"}
     ]
 }
