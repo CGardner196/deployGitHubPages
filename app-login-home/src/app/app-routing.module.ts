@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login-form.component';
 import { HomeComponent } from './home/home.component';
-// import { TestComponentComponent } from './test-component/test-component.component';
+import { LoggedInGuard } from './services/logged-in.guard';
+import { TestComponentComponent } from './test-component/test-component.component';
 
-// import { SuccessMsgComponent } from './components/success-msg/success-msg.component';
-// import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
-import { BehaviourSubjectComponent } from './components/behaviour-subject/behaviour-subject.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard]},
+  { path: 'testcomponent', component: TestComponentComponent },
+  { path: '**', component: LoginFormComponent }  
 ];
 
 @NgModule({
@@ -26,3 +25,8 @@ export class AppRoutingModule {}
 // {path: 'behavioursubject', component: BehaviourSubjectComponent},
 
 // { path: 'testcomponent', component: TestComponentComponent },
+// import { TestComponentComponent } from './test-component/test-component.component';
+
+// import { SuccessMsgComponent } from './components/success-msg/success-msg.component';
+// import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
+// import { BehaviourSubjectComponent } from './components/behaviour-subject/behaviour-subject.component';

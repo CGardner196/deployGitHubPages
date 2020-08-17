@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
-// import { TestComponentComponent } from './test-component/test-component.component';
+import { TestComponentComponent } from './test-component/test-component.component';
 
 import { AuthService } from './auth/auth.service';
+import { LoggedInGuard } from './services/logged-in.guard';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from './components/components.module';
@@ -22,9 +23,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, HomeComponent],
+  declarations: [AppComponent, LoginFormComponent, HomeComponent, TestComponentComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, NgbModule, ComponentsModule, FontAwesomeModule],
-  providers: [AuthService],
+  providers: [AuthService, LoggedInGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -16,9 +16,5 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logOut() {
-    sessionStorage.setItem("currentUser", this.store.currentUser)
-    this.store.currentUser = "";
-    this.router.navigate(['/login']);
-  }
+  
 }

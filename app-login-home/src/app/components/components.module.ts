@@ -9,13 +9,16 @@ import { BehaviourSubjectComponent } from './behaviour-subject/behaviour-subject
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, BehaviourSubjectComponent],
   imports: [
+    RouterModule,
     CommonModule, 
     FontAwesomeModule
   ],
-  exports: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent]
+  exports: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, RouterModule]
 })
 export class ComponentsModule { }
