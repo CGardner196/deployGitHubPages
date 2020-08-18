@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { faTrash, faPencilAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-ref-frm',
@@ -14,29 +15,58 @@ export class RefFrmComponent implements OnInit {
 
   form: FormGroup;
   title: string = "";
+  code: string = "";
   editIndex: number = -1;
   editIndexBool: boolean = false;
+  // refs;
+  rows : [] = [];
 
-  constructor() {}
+  constructor(private store: StoreService) {
+  }
 
-   ngOnInit() {
+  @HostListener("window:beforeunload", ["$event"])
+  pageTitleRefFrm(event: Event) {
+    if(this.title !="") {
+      sessionStorage.setItem("titleRefFrm", this.title);
+      sessionStorage.setItem("codeRefFrm", this.code);
+      sessionStorage.setItem("refsData", JSON.stringify(this.store.refsData));
+    }
+  }
+
+  ngOnInit() {
+    if(sessionStorage.getItem("titleRefFrm")){
+      this.title = sessionStorage.getItem("titleRefFrm");
+      sessionStorage.removeItem("titleRefFrm")
+      this.code = sessionStorage.getItem("codeRefFrm");
+      sessionStorage.removeItem("codeRefFrm");
+      this.rows = this.store.getRefsDataByKey(this.code);
+    } else {
+      this.code = history.state.code;
+      // console.log(this.code);
+      this.title = history.state.lib;
+      // console.log(this.title);
+      this.rows = this.store.getRefsDataByKey(this.code);
+    }
     this.form = new FormGroup({
         code: new FormControl(''),
         lib: new FormControl('')
     });
     // console.log(history.state);
     // console.log(history.state.lib);
-    this.title = history.state.lib;
+    
+    
+    // this.refs = this.store.getRefs();
+    
 }
 
-  rows = [];
+ 
 
   onSubmit(row) {
     if(this.editIndex === -1) {
       this.rows.push(row);
       // this.form.value = null;
+      console.log("submit call ...");
       
-      console.log("submit call ...")
     }
     else {
         this.rows[this.editIndex] = row;
@@ -44,8 +74,11 @@ export class RefFrmComponent implements OnInit {
         this.editIndex = -1;
         this.editIndexBool = false;
     }
+    this.store.refsData.setValue(this.code, this.rows);
+    console.log(this.store.refsData)
     this.form.controls["code"].setValue("");
     this.form.controls["lib"].setValue("");
+    console.log("Ref Data : ", this.store.getRefsData());
   }
 
   onDelete(row) {
@@ -54,6 +87,7 @@ export class RefFrmComponent implements OnInit {
     const index = this.rows.indexOf(row);
     if (index > -1 ) {
       this.rows.splice(index, 1);
+      this.store.refsData.setValue(this.code, this.rows);
     }
   }
 
