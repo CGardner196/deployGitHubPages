@@ -8,7 +8,20 @@
     (ngSubmit)="onSubmit(form.value)">
     <input type="text" name="code" id="code" formControlName="code" placeholder="Code">
     <input type="text" name="lib" id="lib" formControlName="lib" placeholder="Libellé">
-    <button class="button" type="submit">Submit</button>
+    
+    
+    
+    
+    <button class="button" type="submit">
+        <div *ngIf="editIndexBool; else elseTemplate">
+            <fa-icon [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon>
+        </div>
+        
+        <ng-template #elseTemplate>
+            <fa-icon [icon]="plusIcon" [styles]="{'color': 'green'}"></fa-icon>
+        </ng-template>
+    </button>
+
 </form>
 <p></p>
 <p></p>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPencilAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-ref-frm',
@@ -10,9 +10,12 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 export class RefFrmComponent implements OnInit {
   deleteIcon = faTrash;
   editIcon = faPencilAlt;
+  plusIcon = faPlusCircle;
 
   form: FormGroup;
   title: string = "";
+  editIndex: number = -1;
+  editIndexBool: boolean = false;
 
   constructor() {}
 
@@ -29,8 +32,20 @@ export class RefFrmComponent implements OnInit {
   rows = [];
 
   onSubmit(row) {
-    this.rows.push(row);
-    // this.form.value = null;
+    if(this.editIndex === -1) {
+      this.rows.push(row);
+      // this.form.value = null;
+      
+      console.log("submit call ...")
+    }
+    else {
+        this.rows[this.editIndex] = row;
+        console.log("on edit conf call ...");
+        this.editIndex = -1;
+        this.editIndexBool = false;
+    }
+    this.form.controls["code"].setValue("");
+    this.form.controls["lib"].setValue("");
   }
 
   onDelete(row) {
@@ -43,8 +58,15 @@ export class RefFrmComponent implements OnInit {
   }
 
   onEdit(row) {
-    console.log(row);
+    // console.log(row);
     console.log("editing ...");
+
+    // put fields values in 
+    this.form.controls["code"].setValue(row.code);
+    this.form.controls["lib"].setValue(row.lib);
+    this.editIndex = this.rows.indexOf(row)
+    this.editIndexBool = true;
   }
 
+  
 }

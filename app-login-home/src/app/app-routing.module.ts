@@ -6,15 +6,16 @@ import { LoggedInGuard } from './services/logged-in.guard';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { RefListComponent } from './pages/refs/ref-list/ref-list.component';
 import { RefFrmComponent } from './pages/refs/ref-frm/ref-frm.component';
+// import { routes as refsRoutes } from './pages/refs/refs-routing.module';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
-  { path: 'home', component: HomeComponent },
-  // , canActivate: [LoggedInGuard]},
-  { path: 'testcomponent', component: TestComponentComponent }
+  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard], 
+    loadChildren: () => import('./pages/refs/refs.module').then(m => m.RefsModule)},
+  { path: 'testcomponent', component: TestComponentComponent },
   
-  // { path: '**', component: LoginFormComponent }
+  { path: '**', component: LoginFormComponent }
 ];
 
 // RefFrmComponent
