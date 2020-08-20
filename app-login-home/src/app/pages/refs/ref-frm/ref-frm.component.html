@@ -1,24 +1,23 @@
 <p></p>
 <p></p>
-<h1>{{ title }}</h1>
+<h1>{{ lib }}</h1>
 <p></p>
 <p></p>
 <form
     [formGroup]="form"
     (ngSubmit)="onSubmit(form.value)">
-    <input type="text" name="code" id="code" formControlName="code" placeholder="Code">
+    
+    <input type="text" name="code" id="code" formControlName="code" placeholder="Code" >
     <input type="text" name="lib" id="lib" formControlName="lib" placeholder="Libellé">
-    
-    
-    
-    
+
     <button class="button" type="submit">
-        <div *ngIf="editIndexBool; else elseTemplate">
-            <fa-icon [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon>
+        <!-- <div *ngIf="editIndexBool; else elseTemplate"> -->
+        <div *ngIf="editIndex == -1; else elseTemplate">
+            <fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon>
         </div>
         
         <ng-template #elseTemplate>
-            <fa-icon [icon]="plusIcon" [styles]="{'color': 'green'}"></fa-icon>
+            <fa-icon class="faIcon" id="editIcon" [icon]="editIcon"></fa-icon>
         </ng-template>
     </button>
 
@@ -29,8 +28,8 @@
 <p></p>
 <p></p>
 <p></p>
-<table class="table">
-    <thead>
+<table class="table table-hover table-bordered table-fixed">
+    <thead class="thead-light">
       <tr>
         <th scope="col">Code</th>
         <th scope="col">Libellé</th>
@@ -39,12 +38,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let row of rows" [row]="row">
-            <th scope="row">{{ row.code }}</th>
+            <td scope="row">{{ row.code }}</td>
             <td>{{ row.lib }}</td>
-            <td>
+            <td class="actions">
                 <!-- actions should come here, with icons -->
-                <a (click)="onDelete(row)"><fa-icon [icon]="deleteIcon" [styles]="{'color': 'red'}"></fa-icon></a>
-                <a (click)="onEdit(row)"><fa-icon [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
+                <a (click)="onDelete(row)"><fa-icon class="faIcon actionsIcons" [icon]="deleteIcon" [styles]="{'color': 'red'}"></fa-icon></a>
+                <a (click)="onEdit(row)"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
             </td>
         </tr>
     </tbody>

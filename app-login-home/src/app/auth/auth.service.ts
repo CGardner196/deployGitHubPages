@@ -32,8 +32,9 @@ export class AuthService {
     // }
   }
 
-  logOut(user) {
+  logOut() {
     this.store.currentUser = null;
+    sessionStorage.removeItem("currentUser");
     this.router.navigate(['/login']);
   }
 }

@@ -14,18 +14,8 @@ export class AppComponent {
   constructor(private store: StoreService) {}
 
   ngOnInit(): void {
-    this.store.setUsers(db.users);
-    console.log(db.users);
-    this.store.setRefs(db.refs);
-    console.log(db.refs);
-
-    // this.store.setRefsData(db.refs);
     if(sessionStorage.getItem("currentUser")){
-      this.store.currentUser = sessionStorage.getItem("currentUser")
-    }
-    if(sessionStorage.getItem("refsData")){
-      // this.store.refsData = JSON.parse(sessionStorage.getItem("refsData"));
-      // sessionStorage.removeItem("refsData");
+      this.store.currentUser = sessionStorage.getItem("currentUser");
     }
   }
 
@@ -33,9 +23,9 @@ export class AppComponent {
   saveSessionData(event: Event) {
     if(this.store.currentUser) {
       sessionStorage.setItem("currentUser", this.store.currentUser);
-      console.log("Ref Data : ", this.store.getRefsData());      
-      sessionStorage.setItem("refsData", this.store.getRefsData());
-      console.log("host listener event in app.component.ts");
+      sessionStorage.setItem("refElems", JSON.stringify(this.store.getRefElms()));
     }
+    // sessionStorage.setItem("refElems", JSON.stringify(this.store.getRefElms()));
   }
+
 }

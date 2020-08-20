@@ -4,17 +4,19 @@ import { LoginFormComponent } from './login-form.component';
 import { HomeComponent } from './home/home.component';
 import { LoggedInGuard } from './services/logged-in.guard';
 import { TestComponentComponent } from './test-component/test-component.component';
-import { RefListComponent } from './pages/refs/ref-list/ref-list.component';
-import { RefFrmComponent } from './pages/refs/ref-frm/ref-frm.component';
-// import { routes as refsRoutes } from './pages/refs/refs-routing.module';
+
+
 
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
-  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard], 
-    loadChildren: () => import('./pages/refs/refs.module').then(m => m.RefsModule)},
+  { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard],
+    children: [
+      { path: "refs", loadChildren: () => import('./pages/refs/refs.module').then(m => m.RefsModule) },
+      { path: "gestVoit", loadChildren: () => import('./pages/gest-voiture/gest-voiture.module').then(m => m.GestVoitureModule) }
+      ]
+  },
   { path: 'testcomponent', component: TestComponentComponent },
-  
   { path: '**', component: LoginFormComponent }
 ];
 
