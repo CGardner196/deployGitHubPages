@@ -11,21 +11,24 @@ import { FilterVoitPipe } from './filter-voit.pipe';
 
 import { OrderModule } from "ngx-order-pipe";
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 @NgModule({
-  declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe],
+  declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe, ],
   imports: [
     CommonModule,
     GestVoitureRoutingModule, 
     FontAwesomeModule,
     ReactiveFormsModule,
     FormsModule,
-    OrderModule
+    OrderModule,
+    NgxPaginationModule
   ],
   exports: [
     VoitureListComponent, 
     VoitureFrmComponent, 
     GestVoitureRoutingModule,
-    FilterVoitPipe,
     OrderModule
   ]
 })

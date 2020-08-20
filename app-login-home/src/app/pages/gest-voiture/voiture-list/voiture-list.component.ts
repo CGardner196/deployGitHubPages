@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { faTrash, faPencilAlt, faPlusCircle, faSort } from '@fortawesome/free-solid-svg-icons';
 import { StoreService } from 'src/app/services/store.service';
 import { OrderPipe } from "ngx-order-pipe";
+
+// import { pagination } from 'jw-angular-pagination';
 
 @Component({
   selector: 'app-voiture-list',
@@ -9,7 +11,7 @@ import { OrderPipe } from "ngx-order-pipe";
   styleUrls: ['./voiture-list.component.css']
 })
 export class VoitureListComponent implements OnInit {
-  // voitures: Voiture[];
+
   faSortIcon = faSort;
   order: string = "mark";
   reverse: boolean = false;
@@ -17,14 +19,31 @@ export class VoitureListComponent implements OnInit {
   rows; 
   query: string = "";
   sortedVoitures: any[];
+  pageOfItems: any[];
   deleteIcon = faTrash;
   editIcon = faPencilAlt;
   plusIcon = faPlusCircle;
   
+  // Pagination
+  config: any;
+  @Output() changePage = new EventEmitter<any>(true);
+  @Input() initialPage = 1;
+  @Input() pageSize = 10;
+  @Input() maxPages = 10;
+
+  pager: any = {};
+
+
   constructor(private store: StoreService, private orderPipe: OrderPipe) { 
    
     this.voitures = this.store.getVoitures();
     this.sortedVoitures = orderPipe.transform(this.voitures, 'mark');
+    // this.setPage(this.initialPage);
+    this.config = {
+      itemsPerPage: 25,
+      currentPage: 1,
+      totalItems: this.voitures.length
+    }
   }
 
   ngOnInit(): void {
@@ -35,12 +54,33 @@ export class VoitureListComponent implements OnInit {
     if(this.order === value) {
       this.reverse = !this.reverse;
     }
-
     this.order = value;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if( changes.items.currentValue !== changes.items.previousValue ) {
+      this.setPage(this.initialPage);
+    }
+  }
+
+  private setPage(page: number) {
+    // this.pager = paginate(this.voitures.length, page, this.pageSize, this.maxPages);
+
+    let pageOfItems = this.voitures.slice(this.pager.startIndex, this.pager.endIndex +1);
+
+    this.changePage.emit(pageOfItems);
   }
 
   onDelete(row) {
     this.store.deleteVoiture(row.matricule);
+  }
+
+  onChangePage(pageOfItems: any[]){
+    this.pageOfItems = pageOfItems;
+  }
+
+  pageChanged(event) {
+    this.config.currentPage = event;
   }
 
 }

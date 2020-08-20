@@ -42,7 +42,7 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of (voitures | filterVoit: query | orderBy: order:reverse:'case-insensitive')" 
+        <tr *ngFor="let row of (voitures | filterVoit: query | orderBy: order:reverse:'case-insensitive' | paginate: config)" 
         [row]="row">
             <td scope="row">{{ row.mark }}</td>
             <td>{{ row.annee }}</td>
@@ -61,3 +61,4 @@
         </tr>
     </tbody>
 </table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
