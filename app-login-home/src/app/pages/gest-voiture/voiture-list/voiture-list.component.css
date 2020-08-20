@@ -3,9 +3,6 @@ h1 {
     /* text-shadow: 2px 3px 6px lime;  */
 } 
 
-thead {
-    text-align: center;
-}
 
 .faIcon { 
     /* text-shadow: 2px 4px 6px orange;  */
@@ -34,7 +31,7 @@ thead {
 input {
     padding: 12px 12px;
     margin: 8px 2px;
-    box-sizing: border-box;
+    width: 50%;
 }
 
 .actions {
@@ -44,3 +41,16 @@ input {
 .actionsIcons {
     font-size: 1.0em;
 }
+
+thead th {
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 15px;
+    text-align: center;
+}
+
+/* .active {
+    color: rgb(194, 22, 22);
+}
+ */
+

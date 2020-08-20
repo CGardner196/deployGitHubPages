@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import * as Collections from 'typescript-collections';
-import { faTintSlash } from '@fortawesome/free-solid-svg-icons';
 import * as db from '../../assets/db.json';
 
 // class RefObject {
@@ -15,21 +13,76 @@ import * as db from '../../assets/db.json';
 //   }
 // }
 
+export interface Voiture {
+  // id?: any;
+  mark: string;
+  annee: string;
+  model: string;
+  chassis: string;
+  prix: string;
+  matricule: string;
+  color: string;
+  type: string;
+  etat: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
+  
+
   // refData = {
   //   "code": "",
   //   "lib" : "",
   //   "rows": ""
   // }
+  voitures = new BehaviorSubject<Voiture[]>([]);
 
-  // refsData = new Collections.Dictionary<string, []>();
-  // refsData = new Array<RefObject>();
   refElems = {};
+  users = new BehaviorSubject<Object>(null);
+  refs = new BehaviorSubject<Object>(null);
+  currentUser: string;
+  
+
+  getVoitures() {
+    return this.voitures.getValue();
+  }
+
+  setVoitures(voitures) {
+    this.voitures.next(voitures);
+  }
+
+  addVoiture(voiture) {
+    voiture["id"] = this.voitures.getValue().length + 1;
+    const currentValue = this.voitures.getValue();
+    const updatedValue = [...currentValue, voiture];
+    this.voitures.next(updatedValue);
+  }
+
+  editVoiture(voiture){
+    const currentValue = this.voitures.getValue();
+    // const index = currentValue.indexOf(voiture["id"] -1);
+    if(this.getVoitures().find(item => item.matricule === voiture.matricule)) {
+      const currentValue = this.voitures.getValue();
+      this.deleteVoiture(voiture.matricule);
+      const updatedValue = [...this.voitures.getValue(), voiture];
+      this.voitures.next(updatedValue);
+    }
+  }
+
+  deleteVoiture(matricule) {
+    const currentValue = this.voitures.getValue();
+    for(const elt of currentValue) {
+      if(elt.matricule === matricule) {
+        currentValue.splice(currentValue.indexOf(elt), 1);
+      }
+    }
+    this.voitures.next(currentValue);
+  }
+  
 
   getRefElms() {
     return this.refElems;
@@ -46,10 +99,7 @@ export class StoreService {
     this.refElems = refElems;
   }
 
-  users = new BehaviorSubject<Object>(null);
-  refs = new BehaviorSubject<Object>(null);
-  voitures = new BehaviorSubject<Object>(null);
-  currentUser: string;
+  
 
   getUsers() {
     // console.log(this.users.getValue())
@@ -71,6 +121,26 @@ export class StoreService {
     console.log("refs :========= ", refs)
     this.refs.next(refs);
   }
+
+
+  
+
+  constructor() { 
+    this.setRefs(db.refs);
+    this.initRefElms(this.refs.getValue());
+    this.setVoitures(db.voitures);
+    this.setUsers(db.users);
+    if(sessionStorage.getItem("refElems")){
+      this.setRefElms(JSON.parse(sessionStorage.getItem("refElems")));
+    }
+    if(sessionStorage.getItem("voitures")){
+      this.setVoitures(JSON.parse(sessionStorage.getItem("voitures")));
+    }
+  }
+}
+
+
+
 
   
 
@@ -114,26 +184,3 @@ export class StoreService {
   //   // }
   //   console.log(refsData);
   // }
-
-
-  setVoitures(voitures) {
-    this.voitures.next(voitures);
-  }
-
-  getVoitures() {
-    return this.voitures.getValue();
-  }
-
-  constructor() { 
-    this.setRefs(db.refs);
-    this.initRefElms(this.refs.getValue());
-    this.setUsers(db.users);
-    this.setVoitures(db.voitures);
-    if(sessionStorage.getItem("refElems")){
-      this.setRefElms(JSON.parse(sessionStorage.getItem("refElems")));
-    }
-    if(sessionStorage.getItem("voitures")){
-      this.setVoitures(sessionStorage.getItem("voitures"));
-    }
-  }
-}

@@ -13,7 +13,8 @@ import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, BehaviourSubjectComponent],
+  declarations: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, 
+    BehaviourSubjectComponent],
   imports: [
     RouterModule,
     CommonModule, 

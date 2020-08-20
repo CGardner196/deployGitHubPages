@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { faTrash, faPencilAlt, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { StoreService } from 'src/app/services/store.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,12 +14,11 @@ export class RefFrmComponent implements OnInit {
   editIcon = faPencilAlt;
   plusIcon = faPlusCircle;
 
-  form: FormGroup;
+  form;
   lib: string = "";
   code: string = "";
   editIndex: number = -1;
   rows = [];
-  key;
   refElems;
   constructor(private store: StoreService, private route: ActivatedRoute, private fb: FormBuilder) {
 
@@ -74,6 +73,5 @@ export class RefFrmComponent implements OnInit {
     this.form.controls["lib"].setValue(row.lib);
     this.editIndex = this.rows.indexOf(row);
   }
-
-
+  
 }

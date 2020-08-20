@@ -1,24 +1,49 @@
 <h1>Liste des voitures</h1>
 <div>
-    <fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon>
+    <a [routerLink]="['frmvoiture']"><fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon></a>
+    <!-- <fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon> -->
 </div>
-<table class="table table-hover table-bordered table-fixed">
+<div>
+    <input class="form-control mt-2" placeholder="Search for an element" [(ngModel)]="query">
+</div>
+<table class="table table-hover table-bordered table-sm" width="100%">
     <thead class="thead-light">
       <tr>
-        <th scope="col">Marque</th>
-        <th scope="col">Année</th>
-        <th scope="col">Modèle</th>
-        <th scope="col">Numéro chassis</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Immatriculation</th>
-        <th scope="col">Couleur</th>
-        <th scope="col">Type</th>
-        <th scope="col">État</th>
+        <!-- <th [class.active]="order === 'mark'" (click)="setOrder('mark')" scope="col">Marque -->
+        <th (click)="setOrder('mark')" scope="col">Marque
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        
+        <th (click)="setOrder('annee')" scope="col">Année
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('model')" scope="col">Modèle
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('chassis')" scope="col">Numéro chassis
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('prix')" scope="col">Prix
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('matricule')" scope="col">Immatriculation
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('color')" scope="col">Couleur
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('type')" scope="col">Type
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
+        <th (click)="setOrder('etat')" scope="col">État
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of rows" [row]="row">
+        <tr *ngFor="let row of (voitures | filterVoit: query | orderBy: order:reverse:'case-insensitive')" 
+        [row]="row">
             <td scope="row">{{ row.mark }}</td>
             <td>{{ row.annee }}</td>
             <td>{{ row.model }}</td>
@@ -31,7 +56,7 @@
             <td class="actions">
                 <!-- actions should come here, with icons -->
                 <a (click)="onDelete(row)"><fa-icon class="faIcon actionsIcons" [icon]="deleteIcon" [styles]="{'color': 'red'}"></fa-icon></a>
-                <a (click)="onEdit(row)"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
+                <a [routerLink]="['frmvoiture', row]"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
             </td>
         </tr>
     </tbody>

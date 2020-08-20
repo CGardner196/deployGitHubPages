@@ -4,7 +4,7 @@ import { VoitureListComponent } from './voiture-list/voiture-list.component';
 import { VoitureFrmComponent } from './voiture-frm/voiture-frm.component';
 
 const routes: Routes = [
-  { path: 'listvoitures', component: VoitureListComponent},
+  { path: 'listvoitures', component: VoitureListComponent },
   { path: 'listvoitures/frmvoiture', component: VoitureFrmComponent}
 ];
 
