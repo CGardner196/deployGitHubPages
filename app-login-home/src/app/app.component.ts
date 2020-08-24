@@ -1,7 +1,5 @@
 import { Component, HostListener } from '@angular/core';
 import { StoreService } from './services/store.service';
-import * as db from '../assets/db.json';
-import * as Collections from 'typescript-collections';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +23,7 @@ export class AppComponent {
       sessionStorage.setItem("currentUser", this.store.currentUser);
       sessionStorage.setItem("refElems", JSON.stringify(this.store.getRefElms()));
       sessionStorage.setItem("voitures", JSON.stringify(this.store.getVoitures()));
+      sessionStorage.setItem("users", JSON.stringify(this.store.getUsers()))
     }
     // sessionStorage.setItem("refElems", JSON.stringify(this.store.getRefElms()));
   }

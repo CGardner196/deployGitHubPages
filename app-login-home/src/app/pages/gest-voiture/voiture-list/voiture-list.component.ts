@@ -72,11 +72,13 @@ export class VoitureListComponent implements OnInit {
 
   onDelete(row) {
     this.store.deleteVoiture(row.matricule);
-    this.store.voitures.subscribe(res => {},
-      err => {
-        console.log("error on adding a value");
-      });
-    this.voitures = this.store.getVoitures();
+    this.store.voitures.subscribe(res => {
+      
+    },
+    err => {
+      console.log("error on adding a value : ", row);
+    });
+    
     // i should reload page, bcz changes not effective instantaniously
   }
 

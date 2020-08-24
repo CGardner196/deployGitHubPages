@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { RefsService } from 'src/app/services/refs.service';
 
 @Component({
   selector: 'app-voiture-frm',
@@ -10,9 +11,14 @@ import { FormBuilder } from '@angular/forms';
 })
 export class VoitureFrmComponent implements OnInit {
   form;
-  
-  
-  constructor(private store: StoreService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { 
+  eColorVoit;
+  editForm: boolean = false;
+  eEtatVoit;
+  eTypeVoit;
+  keys = Object.keys;
+
+  constructor(private refsService: RefsService, private store: StoreService, private route: ActivatedRoute, 
+    private fb: FormBuilder, private router: Router) { 
     
   }
 
@@ -31,7 +37,11 @@ export class VoitureFrmComponent implements OnInit {
     // console.log(this.route.snapshot.params);
     if(this.route.snapshot.params){
       this.initFormValues(this.route.snapshot.params);
+      this.editForm = true;
     }
+    this.eColorVoit = this.refsService.eColorVoit;
+    this.eEtatVoit = this.refsService.eEtatVoit;
+    this.eTypeVoit = this.refsService.eTypeVoit;
   }
 
   initFormValues(row) {
@@ -47,7 +57,7 @@ export class VoitureFrmComponent implements OnInit {
   }
   
   onSubmit(voiture) {
-    console.log("params route : matricule : ", this.route.snapshot.params['matricule']);
+    // console.log("params route : matricule : ", this.route.snapshot.params['matricule']);
 
     if(!this.route.snapshot.params['matricule']) {
       // add voiture
@@ -55,7 +65,7 @@ export class VoitureFrmComponent implements OnInit {
       this.store.voitures.subscribe(
         res => {},
         err => {
-          console.log("error on adding a value");
+          console.log("error on adding a voiture");
         }
       );
     }

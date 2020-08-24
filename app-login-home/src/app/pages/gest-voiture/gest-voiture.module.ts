@@ -15,7 +15,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
-  declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe, ],
+  declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe],
   imports: [
     CommonModule,
     GestVoitureRoutingModule, 

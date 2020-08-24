@@ -26,6 +26,13 @@ export interface Voiture {
   etat: string;
 }
 
+export interface User {
+  id: number;
+  login: string;
+  pwd: string;
+  name: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +49,7 @@ export class StoreService {
   voitures = new BehaviorSubject<Voiture[]>([]);
 
   refElems = {};
-  users = new BehaviorSubject<Object>(null);
+  users = new BehaviorSubject<User[]>([]);
   refs = new BehaviorSubject<Object>(null);
   currentUser: string;
   
@@ -62,6 +69,13 @@ export class StoreService {
     this.setVoitures(updatedValue);
   }
 
+  addUser(user) {
+    const currentValue = this.users.getValue();
+    const updatedValue = [...currentValue, user];
+    console.log("adding this user : ", user);
+    this.users.next(updatedValue);
+  }
+
   editVoiture(voiture){
     // const currentValue = this.voitures.getValue();
     // const index = currentValue.indexOf(voiture["id"] -1);
@@ -71,6 +85,25 @@ export class StoreService {
       this.voitures.next(updatedValue);
     }
   }
+  
+  editUser(user, login) {
+    if(this.getUsers().find(item => item.login === login)) {
+      this.deleteUser(login);
+      this.addUser(user);
+    }
+    console.log("Total users: ", this.totalUsers())
+  }
+
+  deleteUser(login) {
+    const currentValue = this.getUsers();
+    for(const elt of currentValue) {
+      if(elt.login === login) {
+        currentValue.splice(currentValue.indexOf(elt), 1);
+        this.users.next(currentValue);
+        return;
+      }
+    }
+  }
 
   deleteVoiture(matricule) {
     const currentValue = this.voitures.getValue();
@@ -78,7 +111,7 @@ export class StoreService {
       if(elt.matricule === matricule) {
         currentValue.splice(currentValue.indexOf(elt), 1);
         this.voitures.next(currentValue);
-        break;
+        return;
       }
     }
   }
@@ -122,19 +155,29 @@ export class StoreService {
     this.refs.next(refs);
   }
 
-
+  totalUsers() {
+    return this.users.getValue().length;
+  }
   
 
   constructor() { 
     this.setRefs(db.refs);
     this.initRefElms(this.refs.getValue());
-    this.setUsers(db.users);
-    this.setVoitures(db.voitures);
+    // this.setVoitures(db.voitures);
     if(sessionStorage.getItem("refElems")){
       this.setRefElms(JSON.parse(sessionStorage.getItem("refElems")));
     }
     if(sessionStorage.getItem("voitures")){
       this.setVoitures(JSON.parse(sessionStorage.getItem("voitures")));
+    }
+    else {
+      this.setVoitures(db.voitures);
+    }
+    if(sessionStorage.getItem("users")) {
+      this.setUsers(JSON.parse(sessionStorage.getItem("users")));
+    }
+    else {
+      this.setUsers(db.users);
     }
   }
 }

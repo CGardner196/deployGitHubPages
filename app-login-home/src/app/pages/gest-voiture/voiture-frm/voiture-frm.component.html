@@ -44,19 +44,36 @@
     <div class="form-group row">
         <label for="color" class="col-sm-2 col-form-label">Couleur</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="color" formControlName="color">
+            <select type="text" class="form-control" name="color" formControlName="color">
+                <option [ngValue]="null">Select one ...</option>
+                <option *ngFor="let colVoit of keys(eColorVoit)">
+                    {{eColorVoit[colVoit]}}
+                </option>
+            </select>
         </div>
     </div>
     <div class="form-group row">
         <label for="type" class="col-sm-2 col-form-label">Type</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="type" formControlName="type">
+            <select type="text" class="form-control" name="type" formControlName="type">
+                <option>Select one ...</option>
+                <option *ngFor="let typeVoit of keys(eTypeVoit)">
+                    {{ eTypeVoit[typeVoit] }}
+                </option>
+            </select>
         </div>
     </div>
     <div class="form-group row">
         <label for="etat" class="col-sm-2 col-form-label">État</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="etat" formControlName="etat">
+            <!-- select differ depending on editing or adding mode !! -->
+            
+            <select type="text" class="form-control" name="etat" formControlName="etat">
+                <option [ngValue]="null">Select one ...</option>
+                <option *ngFor="let etatVoit of keys(eEtatVoit)">
+                    {{eEtatVoit[etatVoit]}}
+                </option>
+            </select>
         </div>
     </div>
     

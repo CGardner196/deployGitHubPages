@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from './components/components.module';
 import { RefsModule } from './pages/refs/refs.module';
 import { GestVoitureModule } from './pages/gest-voiture/gest-voiture.module';
+import { GestAdminModule } from './pages/gest-admin/gest-admin.module';
 
 // Font Awesome Module (official)
 // import { AngularFontAwesomeModule } from "angular-font-awesome";
@@ -31,7 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [AppComponent, LoginFormComponent, HomeComponent, TestComponentComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, 
     FormsModule, NgbModule, ComponentsModule, 
-    RefsModule, FontAwesomeModule, GestVoitureModule],
+    RefsModule, FontAwesomeModule, GestVoitureModule, GestAdminModule],
   providers: [AuthService, LoggedInGuard],
   bootstrap: [AppComponent],
 })

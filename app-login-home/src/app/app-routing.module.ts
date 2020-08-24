@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGuard],
     children: [
       { path: "refs", loadChildren: () => import('./pages/refs/refs.module').then(m => m.RefsModule) },
-      { path: "gestVoit", loadChildren: () => import('./pages/gest-voiture/gest-voiture.module').then(m => m.GestVoitureModule) }
+      { path: "gestVoit", loadChildren: () => import('./pages/gest-voiture/gest-voiture.module').then(m => m.GestVoitureModule) },
+      { path: "gestAdmin", loadChildren: () => import('./pages/gest-admin/gest-admin.module').then(m => m.GestAdminModule) }
       ]
   },
   { path: 'testcomponent', component: TestComponentComponent },

@@ -1,5 +1,5 @@
 export enum EtatVoiture {
-    Nouvelle,
-    Moyenne, 
-    Ancienne
+    new = 'NOUVELLE',
+    moy = 'MOYENNE', 
+    old = 'ANCIENNE'
 }

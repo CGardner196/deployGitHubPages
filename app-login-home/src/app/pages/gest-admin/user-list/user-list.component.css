@@ -3,6 +3,12 @@ h1 {
     /* text-shadow: 2px 3px 6px lime;  */
 } 
 
+thead th {
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 15px;
+    text-align: center;
+}
 
 .faIcon { 
     /* text-shadow: 2px 4px 6px orange;  */
@@ -18,21 +24,10 @@ h1 {
     border-color: white;
 } 
 
-#editIcon {
-    color: blue;
-    border: none;
-}
-
 #addIcon {
     color: green;
     border: none;
     float : right;
-}
-
-input {
-    padding: 12px 12px;
-    margin: 8px 2px;
-    width: 50%;
 }
 
 .actions {
@@ -42,21 +37,3 @@ input {
 .actionsIcons {
     font-size: 1.0em;
 }
-
-thead th {
-    cursor: pointer;
-    margin-right: 20px;
-    margin-left: 15px;
-    text-align: center;
-}
-
-#addIcon {
-    
-    /* top: -24px;
-    right: -24px; */
-}
-/* .active {
-    color: rgb(194, 22, 22);
-}
- */
-
