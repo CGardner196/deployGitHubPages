@@ -10,9 +10,11 @@ import { FormBuilder } from '@angular/forms';
 })
 export class VoitureFrmComponent implements OnInit {
   form;
-  editIndex = -1;
   
-  constructor(private store: StoreService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
+  
+  constructor(private store: StoreService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { 
+    
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -42,22 +44,36 @@ export class VoitureFrmComponent implements OnInit {
     this.form.controls["color"].setValue(row.color);
     this.form.controls["type"].setValue(row.type);
     this.form.controls["etat"].setValue(row.etat);
-    this.editIndex = row.id;
   }
   
   onSubmit(voiture) {
-    if(this.editIndex === -1) {
+    console.log("params route : matricule : ", this.route.snapshot.params['matricule']);
+
+    if(!this.route.snapshot.params['matricule']) {
       // add voiture
       this.store.addVoiture(voiture);
+      this.store.voitures.subscribe(
+        res => {},
+        err => {
+          console.log("error on adding a value");
+        }
+      );
     }
     else 
     {
       // editing an existing value
+
       this.store.editVoiture(voiture);
+      this.store.voitures.subscribe(
+        res => {},
+        err => {
+          console.log("error on editing a value");
+        }
+      );
       
     }
-     this.store.voitures.subscribe();
     this.router.navigate(['../'], {relativeTo: this.route});
+    
   }
 
   onCancel() {

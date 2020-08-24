@@ -14,7 +14,7 @@ import * as db from '../../assets/db.json';
 // }
 
 export interface Voiture {
-  // id?: any;
+  id: any;
   mark: string;
   annee: string;
   model: string;
@@ -56,17 +56,16 @@ export class StoreService {
   }
 
   addVoiture(voiture) {
-    voiture["id"] = this.voitures.getValue().length + 1;
-    const currentValue = this.voitures.getValue();
+    // voiture["id"] = this.voitures.getValue().length + 1;
+    const currentValue = this.getVoitures();
     const updatedValue = [...currentValue, voiture];
-    this.voitures.next(updatedValue);
+    this.setVoitures(updatedValue);
   }
 
   editVoiture(voiture){
-    const currentValue = this.voitures.getValue();
+    // const currentValue = this.voitures.getValue();
     // const index = currentValue.indexOf(voiture["id"] -1);
     if(this.getVoitures().find(item => item.matricule === voiture.matricule)) {
-      const currentValue = this.voitures.getValue();
       this.deleteVoiture(voiture.matricule);
       const updatedValue = [...this.voitures.getValue(), voiture];
       this.voitures.next(updatedValue);
@@ -78,9 +77,10 @@ export class StoreService {
     for(const elt of currentValue) {
       if(elt.matricule === matricule) {
         currentValue.splice(currentValue.indexOf(elt), 1);
+        this.voitures.next(currentValue);
+        break;
       }
     }
-    this.voitures.next(currentValue);
   }
   
 
@@ -128,8 +128,8 @@ export class StoreService {
   constructor() { 
     this.setRefs(db.refs);
     this.initRefElms(this.refs.getValue());
-    this.setVoitures(db.voitures);
     this.setUsers(db.users);
+    this.setVoitures(db.voitures);
     if(sessionStorage.getItem("refElems")){
       this.setRefElms(JSON.parse(sessionStorage.getItem("refElems")));
     }
