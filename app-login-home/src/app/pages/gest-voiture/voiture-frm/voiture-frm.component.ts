@@ -58,7 +58,7 @@ export class VoitureFrmComponent implements OnInit {
   
   onSubmit(voiture) {
     // console.log("params route : matricule : ", this.route.snapshot.params['matricule']);
-
+    voiture['prixSold'] = voiture.prix;
     if(!this.route.snapshot.params['matricule']) {
       // add voiture
       this.store.addVoiture(voiture);

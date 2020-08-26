@@ -28,7 +28,7 @@ export class LoginFormComponent implements OnInit {
 
     onSubmit(user) {
         if(this.auth.logIn(user)){
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home/homecontent']);
         }
         else {
             // this.router.navigate(['/login']);

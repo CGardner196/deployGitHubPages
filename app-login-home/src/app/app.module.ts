@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 
 import { AuthService } from './auth/auth.service';
+// import { DbRequesterService } from './services/db-requester.service';
 import { LoggedInGuard } from './services/logged-in.guard';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,17 +23,18 @@ import { GestAdminModule } from './pages/gest-admin/gest-admin.module';
 // Font Awesome
 // import { FontAwesomeModule } from '@fdortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HomeContentComponent } from './home-content/home-content.component';
 
-
+import { HttpClientModule } from '@angular/common/http';
 // Services
 // import { StoreService } from './services/store.service';
 
 
 @NgModule({
-  declarations: [AppComponent, LoginFormComponent, HomeComponent, TestComponentComponent],
+  declarations: [AppComponent, LoginFormComponent, HomeComponent, TestComponentComponent, HomeContentComponent],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, 
     FormsModule, NgbModule, ComponentsModule, 
-    RefsModule, FontAwesomeModule, GestVoitureModule, GestAdminModule],
+    RefsModule, FontAwesomeModule, GestVoitureModule, GestAdminModule, HttpClientModule],
   providers: [AuthService, LoggedInGuard],
   bootstrap: [AppComponent],
 })

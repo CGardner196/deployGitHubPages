@@ -26,6 +26,9 @@
         <th (click)="setOrder('prix')" scope="col">Prix
             <fa-icon [icon]="faSortIcon"></fa-icon>
         </th>
+        <th scope="col">Prix Soldé
+            <fa-icon [icon]="faSortIcon"></fa-icon>
+        </th>
         <th (click)="setOrder('matricule')" scope="col">Immatriculation
             <fa-icon [icon]="faSortIcon"></fa-icon>
         </th>
@@ -44,13 +47,14 @@
     <tbody>
         
         <tr *ngFor="let row of (voitures | filterVoit: query | orderBy: order:reverse:'case-insensitive' 
-        | paginate: config)" 
+        | paginate: config | soldVoiture)" 
         [row]="row" [appVoitBeforeXYear]="row.annee">
             <td scope="row">{{ row.mark }}</td>
             <td>{{ row.annee }}</td>
             <td>{{ row.model }}</td>
             <td>{{ row.chassis }}</td>
             <td>{{ row.prix }}</td>
+            <td>{{ row.prixSold }}</td>
             <td>{{ row.matricule }}</td>
             <td>{{ row.color }}</td>
             <td>{{ row.type }}</td>

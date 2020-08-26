@@ -1,0 +1,25 @@
+h1 {
+    color: rgb(23, 84, 199);
+    padding: 10px 40px;
+}
+
+.introP {
+    padding: 10px 40px;
+}
+
+.card-columns    {
+    /* width: 400px; */
+    padding: 30px;
+
+}
+
+h2 {
+    padding-top: 40px;
+}
+
+/*h1 { 
+    color: rgb(23, 84, 199); 
+    text-shadow: 2px 3px 6px lime; 
+} 
+
+*/

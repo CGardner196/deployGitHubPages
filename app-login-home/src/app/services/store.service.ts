@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import * as db from '../../assets/db.json';
-
+import { DbRequesterService } from './db-requester.service';
+import { Voiture } from '../models/ivoiture';
 // class RefObject {
 //   code: string;
 //   lib: string;
@@ -13,18 +14,19 @@ import * as db from '../../assets/db.json';
 //   }
 // }
 
-export interface Voiture {
-  id: any;
-  mark: string;
-  annee: string;
-  model: string;
-  chassis: string;
-  prix: string;
-  matricule: string;
-  color: string;
-  type: string;
-  etat: string;
-}
+// export interface Voiture {
+//   id: any;
+//   mark: string;
+//   annee: string;
+//   model: string;
+//   chassis: string;
+//   prix: number;
+//   prixSold: number;
+//   matricule: string;
+//   color: string;
+//   type: string;
+//   etat: string;
+// }
 
 export interface User {
   id: number;
@@ -66,6 +68,9 @@ export class StoreService {
   }
 
   setVoitures(voitures) {
+    voitures.forEach(element => {
+      element.prixSold = element.prix;
+    });
     this.voitures.next(voitures);
   }
 
@@ -174,7 +179,7 @@ export class StoreService {
   }
 
   initRefElms(dbcontent) {
-    console.log("dbcontent :========= ", dbcontent)
+    // console.log("dbcontent :========= ", dbcontent)
     dbcontent.forEach(ref => {
       this.refElems[ref.code] = [];
     });
@@ -210,7 +215,7 @@ export class StoreService {
   }
 
   setRefs(refs) {
-    console.log("refs :========= ", refs)
+    // console.log("refs :========= ", refs)
     this.refs.next(refs);
   }
 
@@ -219,7 +224,7 @@ export class StoreService {
   }
   
 
-  constructor() { 
+  constructor(private dbRequester: DbRequesterService) { 
     this.setRefs(db.refs);
     this.initRefElms(this.refs.getValue());
     // this.setVoitures(db.voitures);
@@ -230,7 +235,8 @@ export class StoreService {
       this.setVoitures(JSON.parse(sessionStorage.getItem("voitures")));
     }
     else {
-      this.setVoitures(db.voitures);
+      this.setVoitures(this.dbRequester.getByKey("voitures"));
+      // this.setVoitures(db.voitures);
     }
     
     if(sessionStorage.getItem("profiles")) {
@@ -244,16 +250,7 @@ export class StoreService {
       this.setUsers(JSON.parse(sessionStorage.getItem("users")));
     }
     else {
-      // const users = db.users;
-      // for(const user of users) {
-      //   const reader = new FileReader();
-      //   reader.onload = () => {
-      //     user['fileSrc'] = reader.result as string;
-      //   }
-      //   reader.readAsDataURL(<any>user.file);
-      // }
-      // this.setUsers(users);
-      this.setUsers(db.users);
+      this.setUsers(this.dbRequester.getByKey("users"));
     }
   }
 }

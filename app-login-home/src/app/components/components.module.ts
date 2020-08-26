@@ -10,16 +10,17 @@ import { BehaviourSubjectComponent } from './behaviour-subject/behaviour-subject
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { RouterModule } from '@angular/router';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 
 @NgModule({
   declarations: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, 
-    BehaviourSubjectComponent],
+    BehaviourSubjectComponent, NotFoundPageComponent],
   imports: [
     RouterModule,
     CommonModule, 
     FontAwesomeModule
   ],
-  exports: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, RouterModule]
+  exports: [NavbarComponent, SidebarComponent, SuccessMsgComponent, ErrorMsgComponent, RouterModule, NotFoundPageComponent]
 })
 export class ComponentsModule { }

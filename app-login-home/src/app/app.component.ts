@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { StoreService } from './services/store.service';
+import { DbRequesterService } from './services/db-requester.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { StoreService } from './services/store.service';
 export class AppComponent {
   title = 'app-login-home';
 
-  constructor(private store: StoreService) {}
+  constructor(private store: StoreService, private dbRequester: DbRequesterService) {}
 
   ngOnInit(): void {
     if(sessionStorage.getItem("currentUser")){
