@@ -12,10 +12,11 @@ import { FilterVoitPipe } from './filter-voit.pipe';
 import { OrderModule } from "ngx-order-pipe";
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { VoitBeforeXYearDirective } from './voit-before-xyear.directive';
 
 
 @NgModule({
-  declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe],
+  declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe, VoitBeforeXYearDirective],
   imports: [
     CommonModule,
     GestVoitureRoutingModule, 

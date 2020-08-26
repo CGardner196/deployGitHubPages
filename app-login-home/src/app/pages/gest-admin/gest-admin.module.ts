@@ -9,6 +9,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserFrmComponent } from './user-frm/user-frm.component';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 
+
+// Ng Mutli select  drop down module 
+// https://www.npmjs.com/package/ng-multiselect-dropdown
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 @NgModule({
   declarations: [UserListComponent, UserFrmComponent, UserProfilComponent],
   imports: [
@@ -16,7 +21,8 @@ import { UserProfilComponent } from './user-profil/user-profil.component';
     GestAdminRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ], 
   exports: [
     UserListComponent,

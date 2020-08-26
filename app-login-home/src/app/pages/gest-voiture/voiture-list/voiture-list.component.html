@@ -45,7 +45,7 @@
         
         <tr *ngFor="let row of (voitures | filterVoit: query | orderBy: order:reverse:'case-insensitive' 
         | paginate: config)" 
-        [row]="row">
+        [row]="row" [appVoitBeforeXYear]="row.annee">
             <td scope="row">{{ row.mark }}</td>
             <td>{{ row.annee }}</td>
             <td>{{ row.model }}</td>

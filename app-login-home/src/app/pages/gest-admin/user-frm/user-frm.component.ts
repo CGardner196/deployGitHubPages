@@ -3,6 +3,10 @@ import { StoreService } from 'src/app/services/store.service';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// Drop down select package
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
+
 @Component({
   selector: 'app-user-frm',
   templateUrl: './user-frm.component.html',
@@ -13,18 +17,52 @@ export class UserFrmComponent implements OnInit {
   imageSrc: string;
   constructor(private store: StoreService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
+  // multiple select Dropdown 
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings: IDropdownSettings = {};
+
   ngOnInit(): void {
     this.form = this.fb.group({
       name: [''],
       login: [''],
       pwd: [''], 
-      file: ['']
+      file: [''],
+      profiles: [this.dropdownList]
       // fileSource: ['']
       
     })
     if(this.route.snapshot.params["login"]){
       this.initFormValues(this.route.snapshot.params);
     }
+
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Mumbai' },
+      { item_id: 2, item_text: 'Bangalaru' },
+      { item_id: 3, item_text: 'Navsari' },
+      { item_id: 4, item_text: 'New Delhi' }
+    ];
+    
+    this.selectedItems = [
+      { item_id: 3, item_text: 'Navsari' },
+      { item_id: 4, item_text: 'New Delhi' }
+    ];
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All'
+    };
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+
+  onSelectAll(items: any) {
+    console.log(items);
   }
 
   initFormValues(row) {

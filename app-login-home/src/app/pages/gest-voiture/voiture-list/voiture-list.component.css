@@ -50,13 +50,7 @@ thead th {
     text-align: center;
 }
 
-#addIcon {
-    
-    /* top: -24px;
-    right: -24px; */
+th th .redLine {
+    color: red;
+    /* background-color: blue; */
 }
-/* .active {
-    color: rgb(194, 22, 22);
-}
- */
-
