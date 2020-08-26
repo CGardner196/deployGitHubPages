@@ -1,0 +1,46 @@
+h1 { 
+    color: rgb(23, 84, 199); 
+    /* text-shadow: 2px 3px 6px lime;  */
+} 
+
+thead {
+    text-align: center;
+}
+
+.faIcon { 
+    /* text-shadow: 2px 4px 6px orange;  */
+    /* border: 5px; */
+    /* padding: inherit; */
+    /* margin: 8px 2px; */
+    font-size: 1.5em;
+    /* box-sizing: inherit; */
+    /* display: inline-block; */
+    border-radius: 60px;
+    /* box-shadow: 0px 0px 2px #888; */
+    padding: 0.5em 0.6em;
+    border-color: white;
+} 
+
+#editIcon {
+    color: blue;
+    border: none;
+}
+
+#addIcon {
+    color: green;
+    border: none;
+}
+
+input {
+    padding: 12px 12px;
+    margin: 8px 2px;
+    box-sizing: border-box;
+}
+
+.actions {
+    text-align: center;
+}
+
+.actionsIcons {
+    font-size: 1.0em;
+}

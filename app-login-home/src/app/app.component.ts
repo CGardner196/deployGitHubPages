@@ -23,7 +23,8 @@ export class AppComponent {
       sessionStorage.setItem("currentUser", this.store.currentUser);
       sessionStorage.setItem("refElems", JSON.stringify(this.store.getRefElms()));
       sessionStorage.setItem("voitures", JSON.stringify(this.store.getVoitures()));
-      sessionStorage.setItem("users", JSON.stringify(this.store.getUsers()))
+      sessionStorage.setItem("users", JSON.stringify(this.store.getUsers()));
+      sessionStorage.setItem("profiles", JSON.stringify(this.store.getProfiles()));
     }
     // sessionStorage.setItem("refElems", JSON.stringify(this.store.getRefElms()));
   }

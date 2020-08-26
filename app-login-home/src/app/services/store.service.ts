@@ -31,8 +31,14 @@ export interface User {
   login: string;
   pwd: string;
   name: string;
+  file: string;
+  fileSrc: string;
 }
 
+export interface Profile {
+  code: string;
+  name: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +56,7 @@ export class StoreService {
 
   refElems = {};
   users = new BehaviorSubject<User[]>([]);
+  profiles = new BehaviorSubject<Profile[]>([]);
   refs = new BehaviorSubject<Object>(null);
   currentUser: string;
   
@@ -64,25 +71,51 @@ export class StoreService {
 
   addVoiture(voiture) {
     // voiture["id"] = this.voitures.getValue().length + 1;
-    const currentValue = this.getVoitures();
+    const currentValue = this.voitures.getValue();
     const updatedValue = [...currentValue, voiture];
-    this.setVoitures(updatedValue);
+    this.voitures.next(updatedValue);
+  }
+
+  addProfile(profile) {
+    const currentValue = this.profiles.getValue();
+    const updatedValue = [...currentValue, profile];
+    
+    this.profiles.next(updatedValue);
+    
   }
 
   addUser(user) {
+/*
+  const reader = new FileReader();
+    // reader.readAsDataURL(file); 
+    reader.onload = () => {
+      console.log("reader result : ", reader.result);
+      this.imageSrc = reader.result as string;
+    };
+    reader.readAsDataURL(this.form['file']);
+*/
+    // const reader = new FileReader();
+
+    // reader.readAsDataURL(user.file);
+    // user.fileSrc = reader.result;
+    // reader.onload = () => {
+    //   user.fileSrc = reader.result as string;
+    // }
+    // reader.readAsDataURL(user.file);
+
+
     const currentValue = this.users.getValue();
     const updatedValue = [...currentValue, user];
-    console.log("adding this user : ", user);
+    console.log(user);
     this.users.next(updatedValue);
   }
 
-  editVoiture(voiture){
+  editVoiture(voiture, matricule){
     // const currentValue = this.voitures.getValue();
     // const index = currentValue.indexOf(voiture["id"] -1);
-    if(this.getVoitures().find(item => item.matricule === voiture.matricule)) {
-      this.deleteVoiture(voiture.matricule);
-      const updatedValue = [...this.voitures.getValue(), voiture];
-      this.voitures.next(updatedValue);
+    if(this.getVoitures().find(item => item.matricule === matricule)) {
+      this.deleteVoiture(matricule);
+      this.addVoiture(voiture);
     }
   }
   
@@ -91,11 +124,30 @@ export class StoreService {
       this.deleteUser(login);
       this.addUser(user);
     }
-    console.log("Total users: ", this.totalUsers())
+    // console.log("Total users: ", this.totalUsers())
+  }
+
+  editProfile(profile, code) {
+    if(this.getProfiles().find(item => item.code === code)) {
+      this.deleteProfile(code);
+      this.addProfile(profile);
+    }
+  }
+
+
+  deleteProfile(code) {
+    const currentValue = this.getProfiles();
+    for(const elt of currentValue) {
+      if(elt.code === code) {
+        currentValue.splice(currentValue.indexOf(elt), 1);
+        this.profiles.next(currentValue);
+        return;
+      }
+    }
   }
 
   deleteUser(login) {
-    const currentValue = this.getUsers();
+    const currentValue = this.users.getValue();
     for(const elt of currentValue) {
       if(elt.login === login) {
         currentValue.splice(currentValue.indexOf(elt), 1);
@@ -133,11 +185,18 @@ export class StoreService {
   }
 
   
+  getProfiles() {
+    return this.profiles.getValue();
+  }
 
   getUsers() {
     // console.log(this.users.getValue())
     return this.users.getValue();
     // console.log(this.users.getValue)
+  }
+
+  setProfiles(profiles){
+    this.profiles.next(profiles);
   }
 
   setUsers(users) {
@@ -173,10 +232,27 @@ export class StoreService {
     else {
       this.setVoitures(db.voitures);
     }
+    
+    if(sessionStorage.getItem("profiles")) {
+      this.setProfiles(JSON.parse(sessionStorage.getItem("profiles")));
+    }
+    else {
+      this.setProfiles(db.profiles);
+    }
+
     if(sessionStorage.getItem("users")) {
       this.setUsers(JSON.parse(sessionStorage.getItem("users")));
     }
     else {
+      // const users = db.users;
+      // for(const user of users) {
+      //   const reader = new FileReader();
+      //   reader.onload = () => {
+      //     user['fileSrc'] = reader.result as string;
+      //   }
+      //   reader.readAsDataURL(<any>user.file);
+      // }
+      // this.setUsers(users);
       this.setUsers(db.users);
     }
   }

@@ -26,12 +26,12 @@ export class VoitureListComponent implements OnInit {
   
   // Pagination
   config: any;
-  @Output() changePage = new EventEmitter<any>(true);
-  @Input() initialPage = 1;
-  @Input() pageSize = 10;
-  @Input() maxPages = 10;
+  // @Output() changePage = new EventEmitter<any>(true);
+  // @Input() initialPage = 1;
+  // @Input() pageSize = 10;
+  // @Input() maxPages = 10;
 
-  pager: any = {};
+  // pager: any = {};
 
 
   constructor(private store: StoreService, private orderPipe: OrderPipe) { 
@@ -76,9 +76,10 @@ export class VoitureListComponent implements OnInit {
       
     },
     err => {
-      console.log("error on adding a value : ", row);
+      console.log("error on deleting a value : ", row);
     });
-    
+    this.voitures = this.store.getVoitures();
+    // this.sortedVoitures = this.orderPipe.transform(this.voitures, 'annee');
     // i should reload page, bcz changes not effective instantaniously
   }
 

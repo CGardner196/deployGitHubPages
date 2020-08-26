@@ -35,7 +35,7 @@ export class VoitureFrmComponent implements OnInit {
       etat: ['']
     })
     // console.log(this.route.snapshot.params);
-    if(this.route.snapshot.params){
+    if(this.route.snapshot.params["matricule"]){
       this.initFormValues(this.route.snapshot.params);
       this.editForm = true;
     }
@@ -73,11 +73,11 @@ export class VoitureFrmComponent implements OnInit {
     {
       // editing an existing value
 
-      this.store.editVoiture(voiture);
+      this.store.editVoiture(voiture, this.route.snapshot.params['matricule']);
       this.store.voitures.subscribe(
         res => {},
         err => {
-          console.log("error on editing a value");
+          console.log("error on editing a voiture : ", voiture);
         }
       );
       

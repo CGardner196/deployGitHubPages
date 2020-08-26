@@ -14,13 +14,16 @@ export class LoginFormComponent implements OnInit {
     form: FormGroup;
     errorIcon = faExclamationCircle;
     error = false;
-    constructor(private router: Router, private auth: AuthService) {}
+    constructor(private router: Router, private auth: AuthService) {
+        this.auth.logOut();
+    }
 
     ngOnInit() {
         this.form = new FormGroup({
             login: new FormControl(''),
             pwd: new FormControl('')
         });
+        // sessionStorage.removeItem("currentUser");
     }
 
     onSubmit(user) {

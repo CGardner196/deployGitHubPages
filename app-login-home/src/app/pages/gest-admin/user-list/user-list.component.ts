@@ -27,14 +27,4 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  // onDelete(row) {
-  //   this.store.deleteVoiture(row.matricule);
-  //   this.store.voitures.subscribe(res => {},
-  //     err => {
-  //       console.log("error on adding a value");
-  //     });
-  //   this.voitures = this.store.getVoitures();
-  //   // i should reload page, bcz changes not effective instantaniously
-  // }
-
 }

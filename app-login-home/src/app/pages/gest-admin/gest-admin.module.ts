@@ -7,9 +7,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserFrmComponent } from './user-frm/user-frm.component';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserFrmComponent],
+  declarations: [UserListComponent, UserFrmComponent, UserProfilComponent],
   imports: [
     CommonModule,
     GestAdminRoutingModule,

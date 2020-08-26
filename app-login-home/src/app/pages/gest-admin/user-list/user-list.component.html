@@ -8,6 +8,7 @@
     <thead class="thead-light">
       <tr>
         <!-- <th [class.active]="order === 'mark'" (click)="setOrder('mark')" scope="col">Marque -->
+        <th scope="col">Profil</th>
         <th scope="col">Nom</th>
         <th scope="col">Login</th>
         <th scope="col">Mot de passe</th>
@@ -16,7 +17,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let row of users" [row]="row">
-            <td scope="row">{{ row.name }}</td>
+            <td scope="row">
+              <img src="{{row.fileSrc}}" style="height: 40px; width: 60px;" [alt]="row.name">
+            </td>
+            <td>{{ row.name }}</td>
             <td>{{ row.login }}</td>
             <td>{{ row.pwd }}</td>
             <td class="actions">
