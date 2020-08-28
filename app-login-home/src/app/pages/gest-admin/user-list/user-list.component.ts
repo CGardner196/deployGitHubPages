@@ -41,9 +41,10 @@ export class UserListComponent implements OnInit {
   }
 
   onEdit(row) {
-    const rowU = JSON.stringify(row);
+    // const rowU = JSON.stringify(row);
+    row.profiles = JSON.stringify(row.profiles);
     // this.router.navigate(['./frmuser'], {rfelativeTo: this.route, queryParams : { rowUser: rowU, rowProfiles: profilesS }});//  , relativeTo: this.route);
-    this.router.navigate(['./home/gestAdmin/frmuser'], {queryParams : { rowUser: rowU}});//  , relativeTo: this.route);
+    this.router.navigate(['./home/gestAdmin/frmuser', row]);//, {queryParams : { rowUser: rowU}});//  , relativeTo: this.route);
     // this.router.navigate(['../'], {relativeTo: this.route});
   }
   

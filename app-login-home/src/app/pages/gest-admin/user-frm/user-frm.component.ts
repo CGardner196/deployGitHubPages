@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Drop down select package
 import { Profile } from 'src/app/models/profile';
+import { timer } from 'rxjs';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Profile } from 'src/app/models/profile';
 })
 export class UserFrmComponent implements OnInit {
   form;
+  refreshIfUp = false;
   title: string = "Ajouter un utilisateur";
   imageSrc: string;
   constructor(private store: StoreService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
@@ -40,10 +42,12 @@ export class UserFrmComponent implements OnInit {
     // if(this.route.snapshot.queryParams) {
       
     // if(this.route.snapshot.params) {
-    if(this.route.snapshot.queryParamMap.has("rowUser")){
+      // console.log("rowU is in params : ", this.route.snapshot.params.has("rowU"))
+    if(this.route.snapshot.params["login"]){
+      // console.log("rowU is in params : ", this.route.snapshot.params.has("rowU"))
       this.title = "Modifier un utilisateur";
         // console.log(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")));
-        this.initFormValues(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")));
+      this.initFormValues(this.route.snapshot.params);
     }
     //   console.log(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")));
     // }
@@ -68,14 +72,23 @@ export class UserFrmComponent implements OnInit {
 
 
   initFormValues(row) {
+    const profilesParsed =  JSON.parse(row.profiles);
+
+    console.log(row);
+    this.form.patchValue({
+      login: row.login,
+      name: row.name,
+      pwd: row.pwd,
+      profiles: profilesParsed
+    })
+    this.refreshIfUp = false;
+    timer(500).subscribe(() => this.refreshIfUp = true);
     
-    this.form.controls["login"].setValue(row.login);
-    this.form.controls["name"].setValue(row.name);
-    this.form.controls["pwd"].setValue(row.pwd);
     // console.log(row.profiles);
-    for(const profile of row.profiles) {
-      this.selectedProfiles.push(new Profile(profile.code, profile.name));
-    }
+    // console.log("row profiles : ", row.profiles);
+    // for(const profile of row.profiles) {
+    //   this.selectedProfiles.push(new Profile(profile.code, profile.name));
+    // }
     this.imageSrc = row.fileSrc;
     // this.form.controls["profiles"].setValue(this.selectedProfiles);
     // this.form.controls["file"].setValue(row.file);
@@ -94,12 +107,14 @@ export class UserFrmComponent implements OnInit {
     // this.form.controls["profiles"].setValue(row.profiles) 
   }
 
-
+  compareWith (a,b) {
+    return a.code == b.code
+  }
 
 
   onSubmit(user) {
     user['fileSrc'] = this.imageSrc;
-    if(!this.route.snapshot.queryParamMap.has("rowUser")) {
+    if(!this.route.snapshot.params["login"]) {
       console.log("adding a new one : ", user);
       user['fileSrc'] = this.imageSrc; 
       // console.log("selected profiles : ", user.profiles);
@@ -115,9 +130,10 @@ export class UserFrmComponent implements OnInit {
       // editing an existing value
       // console.log("editing an existing value : ", user);
       // console.log(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")).login);
-      this.store.editUser(user, JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")).login);
+      console.log("old login of updated row : ", this.route.snapshot.params["login"]);
+      this.store.editUser(user, this.route.snapshot.params["login"]);
       // console.log(this.store.getUsers());
-      this.router.navigate(['./home/gestAdmin/listusers']);
+      
       
     }
     // this.route.snapshot.queryParams.clear();

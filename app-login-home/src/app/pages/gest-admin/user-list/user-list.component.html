@@ -34,7 +34,7 @@
             <td class="actions">
               <!-- actions should come here, with icons -->
               <a (click)="onDelete(row)"><fa-icon class="faIcon actionsIcons" [icon]="deleteIcon" [styles]="{'color': 'red'}"></fa-icon></a>
-              <!-- <a [routerLink]="['frmuser', row]"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a> -->
+              <!-- <a [routerLink]="['../frmuser', row: 'row']"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a> -->
               <a (click)="onEdit(row)"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
             </td>
         </tr>
