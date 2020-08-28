@@ -35,21 +35,9 @@ export class UserProfilComponent implements OnInit {
   onSubmit(profile) {
     if (!this.editMode) {
       this.store.addProfile(profile);
-      this.store.profiles.subscribe(
-        res => {},
-        err => {
-          console.log("error on creating a new profile")
-        }
-      );
     }
     else {
       this.store.editProfile(profile, this.profileCode);
-      this.store.profiles.subscribe(
-        res => {},
-        err => {
-          console.log("error on editing a value");
-        }
-      );
       // this.store.setRefElms(this.refElems);
       this.editMode = false;
       this.profileCode = "";
@@ -70,12 +58,6 @@ export class UserProfilComponent implements OnInit {
 
   onDelete(profile) {
     this.store.deleteProfile(profile.code);
-    this.store.profiles.subscribe(
-      res => {},
-      err => {
-        console.log("error on deleting a user's profile : ", profile);
-      }
-    );
     this.profiles = this.store.getProfiles();
   }
 

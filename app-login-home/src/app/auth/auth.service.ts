@@ -12,7 +12,8 @@ export class AuthService {
    }
 
   logIn(user) {
-
+    console.log("user in auth Service login Method :: ---- :: ", user);
+    console.log(this.users);
     if(!this.users.find(item => item.pwd === user.pwd)) { return false;} 
     else {
       this.store.currentUser = user.login;

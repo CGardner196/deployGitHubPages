@@ -28,19 +28,10 @@ import { Voiture } from '../models/ivoiture';
 //   etat: string;
 // }
 
-export interface User {
-  id: number;
-  login: string;
-  pwd: string;
-  name: string;
-  file: string;
-  fileSrc: string;
-}
+import { Profile } from "../models/profile";
+import { User } from "../models/user";
 
-export interface Profile {
-  code: string;
-  name: string;
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,8 +48,8 @@ export class StoreService {
   voitures = new BehaviorSubject<Voiture[]>([]);
 
   refElems = {};
-  users = new BehaviorSubject<User[]>([]);
-  profiles = new BehaviorSubject<Profile[]>([]);
+  users: User[] = [];
+  profiles: Profile[] = [];
   refs = new BehaviorSubject<Object>(null);
   currentUser: string;
   
@@ -81,15 +72,11 @@ export class StoreService {
     this.voitures.next(updatedValue);
   }
 
-  addProfile(profile) {
-    const currentValue = this.profiles.getValue();
-    const updatedValue = [...currentValue, profile];
-    
-    this.profiles.next(updatedValue);
-    
+  addProfile(row) {
+    this.profiles.push(new Profile(row.code, row.name));
   }
 
-  addUser(user) {
+  addUser(row) {
 /*
   const reader = new FileReader();
     // reader.readAsDataURL(file); 
@@ -108,11 +95,8 @@ export class StoreService {
     // }
     // reader.readAsDataURL(user.file);
 
-
-    const currentValue = this.users.getValue();
-    const updatedValue = [...currentValue, user];
-    console.log(user);
-    this.users.next(updatedValue);
+    this.users.push(new User(row.id, row.name, row.token, row.file, row.fileSrc, row.photo, row.login, row.pwd, row.profiles));
+    
   }
 
   editVoiture(voiture, matricule){
@@ -141,22 +125,26 @@ export class StoreService {
 
 
   deleteProfile(code) {
-    const currentValue = this.getProfiles();
-    for(const elt of currentValue) {
+    for(const elt of this.profiles) {
       if(elt.code === code) {
-        currentValue.splice(currentValue.indexOf(elt), 1);
-        this.profiles.next(currentValue);
+        this.profiles.splice(this.profiles.indexOf(elt), 1);
         return;
       }
     }
+    // const currentValue = this.getProfiles();
+    // for(const elt of currentValue) {
+    //   if(elt.code === code) {
+    //     currentValue.splice(currentValue.indexOf(elt), 1);
+    //     this.profiles.next(currentValue);
+    //     return;
+    //   }
+    // }
   }
 
   deleteUser(login) {
-    const currentValue = this.users.getValue();
-    for(const elt of currentValue) {
+    for(const elt of this.users) {
       if(elt.login === login) {
-        currentValue.splice(currentValue.indexOf(elt), 1);
-        this.users.next(currentValue);
+        this.users.splice(this.users.indexOf(elt), 1);
         return;
       }
     }
@@ -191,21 +179,35 @@ export class StoreService {
 
   
   getProfiles() {
-    return this.profiles.getValue();
+    return this.profiles;
   }
 
   getUsers() {
     // console.log(this.users.getValue())
-    return this.users.getValue();
+    return this.users;
     // console.log(this.users.getValue)
   }
 
-  setProfiles(profiles){
-    this.profiles.next(profiles);
+  setProfiles(value){
+    const profiles = new Array();
+    for(let row of value){
+      profiles.push(new Profile(row.code, row.name));
+    }
+    this.profiles = profiles;
+    // this.profiles.next(profiles);
   }
 
-  setUsers(users) {
-    this.users.next(users);
+  setUsers(value) {
+    // let profiles: Profile[] = [];
+    const users = new Array();
+    for(let row of value) {
+      // id: number, name: string, token: string, photo: string, login: string, profiles: Array<IProfile>
+      // for(let profile of row.profiles) {
+      //   profiles.push(new Profile(profile.code, profile.name));
+      // }
+      users.push(new User(row.id, row.name, row.token, row.file, row.fileSrc, row.photo, row.login, row.pwd, row.profiles));
+    }
+    this.users = users;
   }
 
   getRefs() {
@@ -219,9 +221,9 @@ export class StoreService {
     this.refs.next(refs);
   }
 
-  totalUsers() {
-    return this.users.getValue().length;
-  }
+  // totalUsers() {
+  //   return this.users.getValue().length;
+  // }
   
 
   constructor(private dbRequester: DbRequesterService) { 

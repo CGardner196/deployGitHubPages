@@ -1,5 +1,5 @@
 
-<h1>Ajouter un Utilisateur</h1>
+<h1>{{ title }}</h1>
 
 
 <form
@@ -26,15 +26,16 @@
     <div class="form-group row">
         <label for="profiles" class="col-sm-2 col-form-label">Profils</label>
         <div class="col-sm-10">
-            <ng-multiselect-dropdown
-                [placeholder]="'Select profile'"
-                [data]="dropdownList"
+            <ng-select
+                bindLabel="selectedProfiles"
+                
                 formControlName="profiles"
-                [settings]="dropdownSettings"
-                (onSelect)="onItemSelect($event)"
-                (onSelectAll)="onSelectAll($event)"
-            >
-            </ng-multiselect-dropdown>
+                placeholder="Select profile(s)"
+                [multiple]="true">
+                <ng-option *ngFor="let profile of dropdownList" [value]="profile">
+                        {{ profile.name }}
+                </ng-option>
+            </ng-select>
         </div>
     </div>
     <div class="form-group row">

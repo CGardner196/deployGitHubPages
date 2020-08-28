@@ -1,17 +1,18 @@
 
 <h1>Liste des utilisateurs</h1>
 <div>
-    <a [routerLink]="['frmuser']"><fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon></a>
+    <a [routerLink]="['../frmuser']"><fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon></a>
     <!-- <a [routerLink]="['frmvoiture']"><fa-icon class="faIcon" id="addIcon" [icon]="plusIcon"></fa-icon></a> -->
 </div>
 <table class="table table-hover table-bordered table-sm" width="100%">
     <thead class="thead-light">
       <tr>
         <!-- <th [class.active]="order === 'mark'" (click)="setOrder('mark')" scope="col">Marque -->
-        <th scope="col">Profil</th>
+        <th scope="col">Image</th>
         <th scope="col">Nom</th>
         <th scope="col">Login</th>
         <th scope="col">Mot de passe</th>
+        <th scope="col">Profil(s)</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -20,13 +21,21 @@
             <td scope="row">
               <img src="{{row.fileSrc}}" style="height: 40px; width: 60px;" [alt]="row.name">
             </td>
+            <!-- <div>
+                    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 125px; width: 200px;" [alt]="form.value.name">
+                  </div> -->
             <td>{{ row.name }}</td>
             <td>{{ row.login }}</td>
             <td>{{ row.pwd }}</td>
+
+            <td> {{ row.profiles | profilUserList }}</td> <!-- pipe to make this a string of profils array -->
+            
+            
             <td class="actions">
               <!-- actions should come here, with icons -->
               <a (click)="onDelete(row)"><fa-icon class="faIcon actionsIcons" [icon]="deleteIcon" [styles]="{'color': 'red'}"></fa-icon></a>
-              <a [routerLink]="['frmuser', row]"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
+              <!-- <a [routerLink]="['frmuser', row]"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a> -->
+              <a (click)="onEdit(row)"><fa-icon class="faIcon actionsIcons" [icon]="editIcon" [styles]="{'color': 'blue'}"></fa-icon></a>
             </td>
         </tr>
     </tbody>

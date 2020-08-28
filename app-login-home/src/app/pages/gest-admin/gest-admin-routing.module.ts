@@ -6,7 +6,7 @@ import { UserProfilComponent } from './user-profil/user-profil.component';
 
 const routes: Routes = [
   { path: 'listusers', component: UserListComponent }, 
-  { path: 'listusers/frmuser', component: UserFrmComponent },
+  { path: 'frmuser', component: UserFrmComponent },
   { path: 'listprofiles', component: UserProfilComponent }
 ];
 

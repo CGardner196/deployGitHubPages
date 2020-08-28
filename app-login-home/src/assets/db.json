@@ -1,10 +1,12 @@
 {
     "users": [
-        {"name": "Super Admin", "login":"sa", "pwd":"sa", "file": "D:\\Med-Lemin-Hammaden\\ChallengeAngular\\challengeangular\\app-login-home\\src\\assets\\user-profile1.txt"},
-        {"name": "Rahim Dahmoudi", "login":"rahim", "pwd":"dahmoudi@dahmoudi.com"},
-        {"name": "Don Johnson", "login":"don", "pwd":"johnson@johnson.com"},
-        {"name": "Sandy Kilo", "login":"sandy", "pwd":"kilose@kilo.com"},
-        {"name": "Zebra Nicholson", "login":"zebra", "pwd":"zebra@zebra.com"}
+        {"name": "Super Admin", "login":"sa", "pwd":"sa", 
+            "file": "D:\\Med-Lemin-Hammaden\\ChallengeAngular\\challengeangular\\app-login-home\\src\\assets\\user-profile1.txt", "profiles": [
+            {"code": "sa", "name":"Super Admin"}]},
+        {"name": "Rahim Dahmoudi", "login":"rahim", "pwd":"dahmoudi@dahmoudi.com", "profiles": [{"code": "sa", "name":"Super Admin"}]},
+        {"name": "Don Johnson", "login":"don", "pwd":"johnson@johnson.com", "profiles": [{"code": "sa", "name":"Super Admin"}]},
+        {"name": "Sandy Kilo", "login":"sandy", "pwd":"kilose@kilo.com", "profiles": [{"code": "sa", "name":"Super Admin"}]},
+        {"name": "Zebra Nicholson", "login":"zebra", "pwd":"zebra@zebra.com", "profiles": [{"code": "sa", "name":"Super Admin"}]}
     ],
     "profiles": [
         {"code": "sa", "name":"Super Admin"},

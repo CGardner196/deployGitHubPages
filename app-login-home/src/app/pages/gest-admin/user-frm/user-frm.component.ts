@@ -4,7 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Drop down select package
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Profile } from 'src/app/models/profile';
 
 
 @Component({
@@ -14,113 +14,128 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class UserFrmComponent implements OnInit {
   form;
+  title: string = "Ajouter un utilisateur";
   imageSrc: string;
   constructor(private store: StoreService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   // multiple select Dropdown 
   dropdownList = [];
-  selectedItems = [];
-  dropdownSettings: IDropdownSettings = {};
+  selectedProfiles: Profile[] = [];
+  // dropdownSettings: IDropdownSettings = {};
+
+  queryParams;
+
 
   ngOnInit(): void {
+
+    this.dropdownList = this.store.getProfiles();
     this.form = this.fb.group({
       name: [''],
       login: [''],
       pwd: [''], 
       file: [''],
-      profiles: [this.dropdownList]
-      // fileSource: ['']
-      
+      profiles: ['']
     })
-    if(this.route.snapshot.params["login"]){
-      this.initFormValues(this.route.snapshot.params);
+    // console.log(this.route.snapshot.queryParams)
+    // if(this.route.snapshot.queryParams) {
+      
+    // if(this.route.snapshot.params) {
+    if(this.route.snapshot.queryParamMap.has("rowUser")){
+      this.title = "Modifier un utilisateur";
+        // console.log(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")));
+        this.initFormValues(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")));
     }
+    //   console.log(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")));
+    // }
+    // console.log("logging into route query params 1...");
+    // this.route.queryParams.subscribe(params => {
+    //   this.queryParams = params.get('rowUser');
+    // })
 
-    this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangalaru' },
-      { item_id: 3, item_text: 'Navsari' },
-      { item_id: 4, item_text: 'New Delhi' }
-    ];
+    // this.queryParams = this.route.
+    //  ('rowUser');
+
+    // console.log("this.queryParams : ....****** ", this.queryParams);
+    // if(this.queryParams){
+    //   console.log("logging into route query params ...");
+    //   this.initFormValues(this.queryParams);
+    // }
+
     
-    this.selectedItems = [
-      { item_id: 3, item_text: 'Navsari' },
-      { item_id: 4, item_text: 'New Delhi' }
-    ];
-
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All'
-    };
+    
+    
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-
-  onSelectAll(items: any) {
-    console.log(items);
-  }
 
   initFormValues(row) {
+    
     this.form.controls["login"].setValue(row.login);
     this.form.controls["name"].setValue(row.name);
     this.form.controls["pwd"].setValue(row.pwd);
+    // console.log(row.profiles);
+    for(const profile of row.profiles) {
+      this.selectedProfiles.push(new Profile(profile.code, profile.name));
+    }
     this.imageSrc = row.fileSrc;
+    // this.form.controls["profiles"].setValue(this.selectedProfiles);
+    // this.form.controls["file"].setValue(row.file);
+    // this.imageSrc = row.fileSrc;
+
+    // this.form.controls["profiles"].setValue(this.selectedProfiles);
+    // this.selectedProfiles = row.profiles;
+    // console.log(this.selectedProfiles);
+    // this.imageSrc = row.fileSrc;
+    // console.log(row);
+    // this.selectedProfiles = row.profiles;
+    // this.form.controls["profiles"].setValue(this.selectedProfiles);
+    // this.form.controls["profiles"].setValue(selectedUsers);
+    
+    
+    // this.form.controls["profiles"].setValue(row.profiles) 
   }
 
 
 
 
   onSubmit(user) {
-    if(!this.route.snapshot.params["login"]) {
+    user['fileSrc'] = this.imageSrc;
+    if(!this.route.snapshot.queryParamMap.has("rowUser")) {
       console.log("adding a new one : ", user);
-      const reader = new FileReader();
-      reader.onload = () => {
-        user['fileSrc'] = reader.result as string;
-      }
-      reader.readAsDataURL(this.form['file']);
+      user['fileSrc'] = this.imageSrc; 
+      // console.log("selected profiles : ", user.profiles);
+
+      // console.log("before : ", user.fileSrc);
+      
       this.store.addUser(user);
-      this.store.users.subscribe(
-        res => {},
-        err => {
-          console.log("error on creating a new user")
-        }
-      );
     }
-
-
 
     else {
 
 
       // editing an existing value
-      console.log("editing an existing value : ", user);
+      // console.log("editing an existing value : ", user);
+      // console.log(JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")).login);
+      this.store.editUser(user, JSON.parse(this.route.snapshot.queryParamMap.get("rowUser")).login);
+      // console.log(this.store.getUsers());
+      this.router.navigate(['./home/gestAdmin/listusers']);
       
-      this.store.editUser(user, this.route.snapshot.params['login']);
-      this.store.users.subscribe(
-        res => {},
-        err => {
-          console.log("error on editing a value");
-        }
-      );
     }
-      
-    this.router.navigate(['../'], {relativeTo: this.route});
+    // this.route.snapshot.queryParams.clear();
+    // this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['./home/gestAdmin/listusers']);
   }
 
   onFileChange(event) {
+    const fileImage = <HTMLInputElement>event.target.files[0]; 
+    this.form['file'] = fileImage;
     // Image Preview
-    console.log("loggging ...");
+    // console.log("loggging ...");
     // console.log("event target : -*****-*-", event.target);
-    const fileImage = <HTMLInputElement>event.target.files[0];
-    console.log("after *********", <HTMLInputElement>event.target.files[0])
+    
+    // console.log("after *********", <HTMLInputElement>event.target.files[0])
     // if(event.target.files && event.taget.files.length) {
     // const [file] = event.target.files;
-    this.form['file'] = fileImage;
+    
     // // .patchValue({
     // //   file: fileImage
     // // })
@@ -131,11 +146,12 @@ export class UserFrmComponent implements OnInit {
     const reader = new FileReader();
     // reader.readAsDataURL(file); 
     reader.onload = () => {
-      console.log("reader result : ", reader.result);
+      // console.log("reader result : ", reader.result);
       this.imageSrc = reader.result as string;
     };
     reader.readAsDataURL(this.form['file']);
     // }
+    // this.form['fileSrc'] = this.imageSrc;
   }
 
 }
