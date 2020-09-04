@@ -30,7 +30,7 @@ import { Voiture } from '../models/ivoiture';
 
 import { Profile } from "../models/profile";
 import { User } from "../models/user";
-
+import { VoitType } from "../pages/gest-voiture/models/voit-type";
 
 
 @Injectable({
@@ -39,7 +39,7 @@ import { User } from "../models/user";
 export class StoreService {
 
   
-
+  voitTypes: VoitType[] = [];
   // refData = {
   //   "code": "",
   //   "lib" : "",
@@ -224,6 +224,34 @@ export class StoreService {
   // totalUsers() {
   //   return this.users.getValue().length;
   // }
+
+
+  // Voit Type
+
+  getVoitTypes(){
+    return this.voitTypes;
+  }
+
+  
+  editVoitType(type, code){
+    if(this.getVoitTypes().find(item => item.code === code)) {
+      this.deleteVoitType(code);
+      this.addVoitType(type);
+    }
+  }
+
+  deleteVoitType(code) {
+    for(const elt of this.voitTypes){
+      if(elt.code === code) {
+        this.voitTypes.splice(this.voitTypes.indexOf(elt), 1);
+        return;
+      }
+    }
+  }
+
+  addVoitType(type) {
+    this.voitTypes.push(new VoitType(type.code, type.lib));
+  }
   
 
   constructor(private dbRequester: DbRequesterService) { 

@@ -16,6 +16,8 @@ export class VoitureFrmComponent implements OnInit {
   eEtatVoit;
   eTypeVoit;
   keys = Object.keys;
+  selectedType;
+  voitTypes = [];
 
   constructor(private refsService: RefsService, private store: StoreService, private route: ActivatedRoute, 
     private fb: FormBuilder, private router: Router) { 
@@ -23,6 +25,7 @@ export class VoitureFrmComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.voitTypes = this.store.getVoitTypes();
     this.form = this.fb.group({
       mark: [''],
       annee: [''],

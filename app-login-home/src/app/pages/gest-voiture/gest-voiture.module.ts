@@ -14,7 +14,7 @@ import { OrderModule } from "ngx-order-pipe";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { VoitBeforeXYearDirective } from './voit-before-xyear.directive';
 import { SoldVoiturePipe } from './sold-voiture.pipe';
-
+import { NgSelectModule } from "@ng-select/ng-select";
 
 @NgModule({
   declarations: [VoitureListComponent, VoitureFrmComponent, FilterVoitPipe, VoitBeforeXYearDirective, SoldVoiturePipe],
@@ -25,7 +25,8 @@ import { SoldVoiturePipe } from './sold-voiture.pipe';
     ReactiveFormsModule,
     FormsModule,
     OrderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgSelectModule
   ],
   exports: [
     VoitureListComponent, 

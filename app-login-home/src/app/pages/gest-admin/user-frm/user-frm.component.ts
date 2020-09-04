@@ -108,7 +108,7 @@ export class UserFrmComponent implements OnInit {
   }
 
   compareWith (a,b) {
-    return a.code == b.code
+    return a.code == b.code;
   }
 
 

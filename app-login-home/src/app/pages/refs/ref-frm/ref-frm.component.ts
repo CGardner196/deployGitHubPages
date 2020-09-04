@@ -27,6 +27,9 @@ export class RefFrmComponent implements OnInit {
   ngOnInit() {
     
     this.code = this.route.snapshot.params.code;
+    if(this.code === "type") {
+      this.rows = this.store.getVoitTypes();
+    }
     this.lib = this.route.snapshot.params.lib;
     this.refElems = this.store.getRefElms();
     this.rows = this.refElems[this.code]
@@ -41,6 +44,9 @@ export class RefFrmComponent implements OnInit {
     if (this.editIndex === -1) {
       this.rows.push(row);
       // this.store.setRefElms(this.refElems);
+      if(this.code === "type") {
+        this.store.addVoitType(row);
+      }
     }
     else {
       this.rows[this.editIndex] = row;

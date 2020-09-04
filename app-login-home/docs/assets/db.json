@@ -1,0 +1,48 @@
+{
+    "users": [
+        {"name": "Super Admin", "login":"sa", "pwd":"sa", 
+            "file": "D:\\Med-Lemin-Hammaden\\ChallengeAngular\\challengeangular\\app-login-home\\src\\assets\\user-profile1.txt", "profiles": [
+            {"code": "sa", "name":"Super Admin"}]},
+        {"name": "Rahim Dahmoudi", "login":"rahim", "pwd":"dahmoudi@dahmoudi.com", "profiles": [{"code": "sa", "name":"Super Admin"}]},
+        {"name": "Don Johnson", "login":"don", "pwd":"johnson@johnson.com", "profiles": [{"code": "sa", "name":"Super Admin"}]},
+        {"name": "Sandy Kilo", "login":"sandy", "pwd":"kilose@kilo.com", "profiles": [{"code": "sa", "name":"Super Admin"}]},
+        {"name": "Zebra Nicholson", "login":"zebra", "pwd":"zebra@zebra.com", "profiles": [{"code": "sa", "name":"Super Admin"}]}
+    ],
+    "profiles": [
+        {"code": "sa", "name":"Super Admin"},
+        {"code": "su", "name": "Simple User"},
+        {"code": "manager", "name": "Manager"},
+        {"code": "clt", "name": "Client"},
+        {"code": "developer", "name": "Developer"}
+    ],
+    "refs": [
+        {"code":"type", "lib":"Types de voitures"},
+        {"code":"col", "lib":"Couleurs de voitures"},
+        {"code":"models", "lib":"Modèles"},
+        {"code":"etats", "lib":"États"},
+        {"code":"profils", "lib":"Profils"}
+    ],
+    "voitures": [
+        {"id": "1", "mark": "Volvo1", "annee": "2017", "model": "Dazo", "chassis": "WDB2100171Y210286", "prix": "1200.0", "matricule": "12301AA00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "2", "mark": "Peugeot2", "annee": "2009", "model": "Renoz", "chassis": "AZS2100171K210286", "prix": "1800.0", "matricule": "96451AB02", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "3", "mark": "Rolls-Royce3", "annee": "2014", "model": "Kambo", "chassis": "NSA2100171E210286", "prix": "1100.0", "matricule": "58921AV00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "4", "mark": "Mitsibushi4", "annee": "2012", "model": "Dacia", "chassis": "PZL2100171Q210286", "prix": "900.0", "matricule": "56211AA06", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "5", "mark": "Volkswagen6", "annee": "2005", "model": "Picka", "chassis": "DAE2100171R210286", "prix": "1455.0", "matricule": "65231AE00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "6", "mark": "Volvo7", "annee": "2015", "model": "Dazo", "chassis": "WDB2100171Y210286", "prix": "1200.0", "matricule": "12302AA00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "7", "mark": "Peugeot8", "annee": "2016", "model": "Renoz", "chassis": "AZS2100171K210286", "prix": "1800.0", "matricule": "96452AB02", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "8", "mark": "Rolls-Royce9", "annee": "2007", "model": "Kambo", "chassis": "NSA2100171E210286", "prix": "1100.0", "matricule": "58922AV00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "9", "mark": "Mitsibushi10", "annee": "2015", "model": "Dacia", "chassis": "PZL2100171Q210286", "prix": "900.0", "matricule": "56212AA06", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "10", "mark": "Volkswagen11", "annee": "2015", "model": "Picka", "chassis": "DAE2100171R210286", "prix": "1455.0", "matricule": "65232AE00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "11", "mark": "Volvo12", "annee": "2010", "model": "Dazo", "chassis": "WDB2100171Y210286", "prix": "1200.0", "matricule": "12303AA00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "12", "mark": "Peugeot13", "annee": "2009", "model": "Renoz", "chassis": "AZS2100171K210286", "prix": "1800.0", "matricule": "96453AB02", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "13", "mark": "Rolls-Royce414", "annee": "2017", "model": "Kambo", "chassis": "NSA2100171E210286", "prix": "1100.0", "matricule": "58923AV00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "14", "mark": "Mitsibushi15", "annee": "2012", "model": "Dacia", "chassis": "PZL2100171Q210286", "prix": "900.0", "matricule": "56213AA06", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "15", "mark": "Volkswagen16", "annee": "2015", "model": "Picka", "chassis": "DAE2100171R210286", "prix": "1455.0", "matricule": "65233AE00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "16", "mark": "Volvo17", "annee": "2018", "model": "Dazo", "chassis": "WDB2100171Y210286", "prix": "1200.0", "matricule": "12304AA00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "17", "mark": "Peugeot18", "annee": "2019", "model": "Renoz", "chassis": "AZS2100171K210286", "prix": "1800.0", "matricule": "96454AB02", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "18", "mark": "Rolls-Royce19", "annee": "2018", "model": "Kambo", "chassis": "NSA2100171E210286", "prix": "1100.0", "matricule": "58924AV00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "19", "mark": "Mitsibushi20", "annee": "2012", "model": "Dacia", "chassis": "PZL2100171Q210286", "prix": "900.0", "matricule": "56214AA06", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "20", "mark": "Volkswagen21", "annee": "2015", "model": "Picka", "chassis": "DAE2100171R210286", "prix": "1455.0", "matricule": "65234AE00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"},
+        {"id": "21", "mark": "Volvo22", "annee": "2010", "model": "Dazo", "chassis": "WDB2100171Y210286", "prix": "1200.0", "matricule": "12305AA00", "color": "YELLOW", "type": "4x4", "etat": "ANCIENNE"}
+    ]
+}

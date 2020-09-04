@@ -52,17 +52,30 @@
             </select>
         </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
         <label for="type" class="col-sm-2 col-form-label">Type</label>
         <div class="col-sm-10">
-            <select type="text" class="form-control" name="type" formControlName="type">
-                <option>Select one ...</option>
-                <option *ngFor="let typeVoit of keys(eTypeVoit)">
-                    {{ eTypeVoit[typeVoit] }}
-                </option>
-            </select>
+            <ng-select *ngIf="refreshIfUp; else elseTemplate"
+                bindLabel="selectedType"
+                [compareWith]="compareWith"
+                formControlName="type"
+                placeholder="Select type">
+                <ng-option *ngFor="let type of voitTypes" [value]="type">
+                        {{ type.lib }}
+                </ng-option>
+            </ng-select>
+            <ng-template #elseTemplate>
+                <ng-select
+                    bindLabel="selectedType"
+                    formControlName="type"
+                    placeholder="Select type">
+                    <ng-option *ngFor="let type of voitTypes" [value]="type">
+                            {{ type.lib }}
+                    </ng-option>
+                </ng-select>
+            </ng-template>
         </div>
-    </div>
+    </div> -->
     <div class="form-group row">
         <label for="etat" class="col-sm-2 col-form-label">État</label>
         <div class="col-sm-10">
